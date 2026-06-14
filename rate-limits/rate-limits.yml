@@ -1,0 +1,28 @@
+name: Yearn Finance API Rate Limits
+description: >-
+  Yearn Finance does not publish explicit rate limits for its public APIs.
+  The yDaemon REST API and Kong GraphQL API are publicly accessible without
+  authentication. No official rate limiting policies or quotas are documented.
+  Developers are encouraged to use the APIs responsibly and consider running
+  their own instances of yDaemon or Kong for production workloads requiring
+  high request volumes.
+rateLimits:
+  - name: yDaemon REST API Rate Limit
+    description: >-
+      No documented rate limits. The API is publicly accessible. Data refresh
+      intervals: prices update every 30 seconds; APY information updates every
+      10 minutes. For high-volume production use, self-hosting is recommended.
+    url: https://github.com/yearn/ydaemon
+    limits: []
+  - name: Kong GraphQL API Rate Limit
+    description: >-
+      No documented rate limits. The public endpoint is hosted on Vercel as
+      a serverless function. For high-volume or production indexing workloads,
+      running a local Kong instance is recommended.
+    url: https://github.com/yearn/kong
+    limits: []
+notes:
+  - No API key or authentication is required for either API.
+  - For production use cases requiring high request volumes, the open-source
+    yDaemon and Kong repositories support self-hosted deployments.
+  - Data freshness - prices every 30s, APY every 10 min.

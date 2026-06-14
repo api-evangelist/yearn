@@ -1,0 +1,23 @@
+name: Yearn Finance API Plans
+description: >-
+  Yearn Finance APIs are fully open and public with no authentication required.
+  There are no commercial tiered plans — the APIs are provided as public
+  infrastructure for the DeFi ecosystem. Both the yDaemon REST API and the
+  Kong GraphQL API are freely accessible without API keys, registration,
+  or payment. The protocol is open source and community-maintained.
+plans:
+  - name: Public (Free)
+    description: >-
+      Fully open public API access with no authentication, no API keys, and
+      no registration required. Available to all developers building on or
+      integrating with the Yearn Finance protocol across all supported EVM networks.
+    url: https://docs.yearn.fi/developers/building-on-yearn
+    hasTrial: false
+    isFree: true
+    apis:
+      - name: yDaemon REST API
+        baseURL: https://ydaemon.yearn.fi
+        humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
+      - name: Kong GraphQL API
+        baseURL: https://kong.yearn.fi
+        humanURL: https://docs.yearn.fi/developers/data-services/yearn-data

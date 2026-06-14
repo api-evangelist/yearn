@@ -1,0 +1,41 @@
+name: Yearn Finance API FinOps
+description: >-
+  Yearn Finance APIs are provided as public DeFi infrastructure at no cost.
+  There are no API usage fees, subscription costs, or commercial pricing tiers.
+  The protocol is decentralized and open source, with APIs maintained by the
+  Yearn community. Cost considerations relate to on-chain transaction fees
+  (gas costs) when interacting with Yearn smart contracts, not to API access.
+costs:
+  - name: API Access
+    description: Free — no cost for accessing yDaemon REST API or Kong GraphQL API.
+    amount: 0
+    currency: USD
+    period: month
+  - name: On-Chain Transactions
+    description: >-
+      Gas fees apply when executing transactions on EVM networks (deposits,
+      withdrawals, strategy interactions). Costs vary by network and gas prices.
+      APIs themselves are read-only and free; on-chain writes incur standard
+      network gas fees.
+    amount: variable
+    currency: ETH/native-token
+    period: per-transaction
+  - name: Self-Hosted Deployment
+    description: >-
+      Operators running their own yDaemon or Kong instances incur infrastructure
+      costs for servers, RPC node access (e.g., Alchemy, Infura), and storage.
+      Yearn does not charge for the open-source software itself.
+    amount: variable
+    currency: USD
+    period: month
+notes:
+  - No API keys, subscriptions, or payments required for public endpoint access.
+  - Yearn charges protocol-level fees (performance and management fees) on vault
+    yields, separate from API access. These are smart contract fees, not API fees.
+  - Self-hosting is recommended for production workloads; infrastructure costs
+    depend on cloud provider and RPC node provider pricing.
+links:
+  - name: Yearn Fee Structure
+    url: https://docs.yearn.fi/getting-started/guides/how-apy-works
+  - name: Building on Yearn
+    url: https://docs.yearn.fi/developers/building-on-yearn
