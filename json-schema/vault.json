@@ -1,0 +1,324 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ydaemon.yearn.fi/schema/vault",
+  "title": "Vault",
+  "description": "A Yearn Finance vault with full metadata including APY, TVL, token info, and strategy details.",
+  "type": "object",
+  "properties": {
+    "address": {
+      "type": "string",
+      "pattern": "^0x[a-fA-F0-9]{40}$",
+      "description": "Contract address of the vault.",
+      "examples": ["0x8176b059BD8f63aeB7e20282b12D243b4626E2AE"]
+    },
+    "type": {
+      "type": "string",
+      "description": "Vault type classification.",
+      "examples": ["Automated Yearn Vault"]
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["Legacy", "Multiple", "Single"],
+      "description": "Vault kind identifier."
+    },
+    "symbol": {
+      "type": "string",
+      "description": "Vault token symbol.",
+      "examples": ["yvCurve-FRAX-crvUSD-f"]
+    },
+    "displaySymbol": {
+      "type": "string",
+      "description": "Display symbol used in UIs."
+    },
+    "formatedSymbol": {
+      "type": "string",
+      "description": "Formatted symbol for display."
+    },
+    "name": {
+      "type": "string",
+      "description": "Full name of the vault.",
+      "examples": ["Curve FRAX-crvUSD Factory yVault"]
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Display name used in UIs."
+    },
+    "formatedName": {
+      "type": "string",
+      "description": "Formatted name for display."
+    },
+    "icon": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the vault token icon."
+    },
+    "version": {
+      "type": "string",
+      "description": "Vault contract version.",
+      "examples": ["0.4.6"]
+    },
+    "category": {
+      "type": "string",
+      "description": "Asset category of the vault.",
+      "examples": ["Stablecoin", "Volatile", "DeFi Tokens"]
+    },
+    "decimals": {
+      "type": "integer",
+      "description": "Number of decimals for the vault token.",
+      "examples": [18]
+    },
+    "chainID": {
+      "type": "integer",
+      "description": "Chain ID where the vault is deployed.",
+      "enum": [1, 10, 137, 250, 8453, 42161],
+      "examples": [1]
+    },
+    "endorsed": {
+      "type": "boolean",
+      "description": "Whether the vault is officially endorsed by Yearn."
+    },
+    "boosted": {
+      "type": "boolean",
+      "description": "Whether the vault has boosted rewards active."
+    },
+    "emergency_shutdown": {
+      "type": "boolean",
+      "description": "Whether the vault is in emergency shutdown mode."
+    },
+    "token": {
+      "$ref": "#/$defs/VaultToken"
+    },
+    "tvl": {
+      "$ref": "#/$defs/VaultTVL"
+    },
+    "apr": {
+      "$ref": "#/$defs/VaultAPR"
+    },
+    "details": {
+      "$ref": "#/$defs/VaultDetails"
+    },
+    "strategies": {
+      "type": "array",
+      "description": "List of yield strategies allocated to the vault.",
+      "items": {
+        "$ref": "#/$defs/VaultStrategy"
+      }
+    }
+  },
+  "required": ["address", "chainID", "name", "symbol"],
+  "$defs": {
+    "VaultToken": {
+      "type": "object",
+      "description": "The underlying token accepted by the vault.",
+      "properties": {
+        "address": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]{40}$",
+          "description": "Contract address of the underlying token."
+        },
+        "underlyingTokensAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^0x[a-fA-F0-9]{40}$"
+          },
+          "description": "Addresses of tokens composing an LP token."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the underlying token."
+        },
+        "symbol": {
+          "type": "string",
+          "description": "Symbol of the underlying token."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type classification of the token.",
+          "examples": ["Curve LP", "ERC-20"]
+        },
+        "display_name": {
+          "type": "string",
+          "description": "Human-readable display name."
+        },
+        "display_symbol": {
+          "type": "string",
+          "description": "Human-readable display symbol."
+        },
+        "description": {
+          "type": "string",
+          "description": "Markdown description of the token."
+        },
+        "icon": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the token icon image."
+        },
+        "decimals": {
+          "type": "integer",
+          "description": "Number of decimals for the token."
+        }
+      },
+      "required": ["address", "name", "symbol", "decimals"]
+    },
+    "VaultTVL": {
+      "type": "object",
+      "description": "Total Value Locked metrics for the vault.",
+      "properties": {
+        "totalAssets": {
+          "type": "string",
+          "description": "Raw total assets in the vault as a string integer (wei)."
+        },
+        "tvl": {
+          "type": "number",
+          "description": "Total Value Locked in USD."
+        },
+        "price": {
+          "type": "number",
+          "description": "Price of the underlying token in USD."
+        }
+      }
+    },
+    "VaultAPR": {
+      "type": "object",
+      "description": "Annual Percentage Rate data for the vault.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "APR calculation method.",
+          "examples": ["v2:averaged"]
+        },
+        "netAPR": {
+          "type": "number",
+          "description": "Current net APR as a decimal (e.g. 0.05 = 5%)."
+        },
+        "fees": {
+          "type": "object",
+          "properties": {
+            "performance": {
+              "type": "number",
+              "description": "Performance fee as a decimal."
+            },
+            "management": {
+              "type": "number",
+              "description": "Management fee as a decimal."
+            }
+          }
+        },
+        "points": {
+          "type": "object",
+          "description": "Historical APR data points.",
+          "properties": {
+            "weekAgo": {"type": "number"},
+            "monthAgo": {"type": "number"},
+            "inception": {"type": "number"}
+          }
+        },
+        "pricePerShare": {
+          "type": "object",
+          "description": "Price per share at different time points.",
+          "properties": {
+            "today": {"type": "number"},
+            "weekAgo": {"type": "number"},
+            "monthAgo": {"type": "number"}
+          }
+        },
+        "extra": {
+          "type": "object",
+          "properties": {
+            "stakingRewardsAPR": {
+              "type": ["number", "null"]
+            },
+            "gammaRewardAPR": {
+              "type": ["number", "null"]
+            }
+          }
+        },
+        "forwardAPR": {
+          "type": "object",
+          "description": "Forward-looking APR estimate.",
+          "properties": {
+            "type": {"type": "string"},
+            "netAPR": {"type": "number"},
+            "composite": {
+              "type": "object",
+              "properties": {
+                "boost": {"type": "number"},
+                "poolAPY": {"type": "number"},
+                "boostedAPR": {"type": "number"},
+                "baseAPR": {"type": "number"},
+                "cvxAPR": {"type": "number"},
+                "rewardsAPR": {"type": "number"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "VaultDetails": {
+      "type": "object",
+      "description": "Additional metadata and classification details.",
+      "properties": {
+        "isRetired": {"type": "boolean"},
+        "isHidden": {"type": "boolean"},
+        "isAggregator": {"type": "boolean"},
+        "isBoosted": {"type": "boolean"},
+        "isAutomated": {"type": "boolean"},
+        "isHighlighted": {"type": "boolean"},
+        "isPool": {"type": "boolean"},
+        "poolProvider": {
+          "type": "string",
+          "description": "Name of the liquidity pool provider.",
+          "examples": ["Curve", "Balancer", "Uniswap"]
+        },
+        "stability": {
+          "type": "string",
+          "description": "Stability classification.",
+          "examples": ["Stable", "Volatile"]
+        },
+        "category": {
+          "type": "string",
+          "description": "Asset category classification.",
+          "examples": ["Stablecoin", "DeFi Tokens"]
+        },
+        "stableBaseAsset": {
+          "type": "string",
+          "description": "Base asset for stable vaults.",
+          "examples": ["USD", "ETH", "BTC"]
+        }
+      }
+    },
+    "VaultStrategy": {
+      "type": "object",
+      "description": "A strategy allocated to the vault.",
+      "properties": {
+        "address": {
+          "type": "string",
+          "pattern": "^0x[a-fA-F0-9]{40}$",
+          "description": "Contract address of the strategy."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the strategy."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "inactive", "retired"],
+          "description": "Current status of the strategy."
+        },
+        "details": {
+          "type": "object",
+          "properties": {
+            "totalDebt": {"type": "string"},
+            "totalLoss": {"type": "string"},
+            "totalGain": {"type": "string"},
+            "performanceFee": {"type": "number"},
+            "lastReport": {"type": "integer"},
+            "debtRatio": {"type": "number"}
+          }
+        }
+      },
+      "required": ["address", "name", "status"]
+    }
+  }
+}

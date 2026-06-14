@@ -1,0 +1,91 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "yearn": "https://yearn.fi/vocab#",
+    "defi": "https://w3id.org/defi#",
+    "evm": "https://w3id.org/evm#",
+    "Vault": "yearn:Vault",
+    "VaultToken": "yearn:VaultToken",
+    "VaultStrategy": "yearn:VaultStrategy",
+    "address": {
+      "@id": "evm:contractAddress",
+      "@type": "@id"
+    },
+    "chainID": {
+      "@id": "evm:chainId",
+      "@type": "xsd:integer"
+    },
+    "symbol": "schema:identifier",
+    "name": "schema:name",
+    "displayName": "schema:alternateName",
+    "description": "schema:description",
+    "icon": {
+      "@id": "schema:image",
+      "@type": "@id"
+    },
+    "version": "schema:version",
+    "category": "schema:category",
+    "decimals": "yearn:decimals",
+    "endorsed": "yearn:endorsed",
+    "boosted": "yearn:boosted",
+    "emergency_shutdown": "yearn:emergencyShutdown",
+    "token": "yearn:underlyingToken",
+    "tvl": {
+      "@id": "yearn:tvl",
+      "@type": "yearn:TVLMetric"
+    },
+    "apr": {
+      "@id": "yearn:apr",
+      "@type": "yearn:APRMetric"
+    },
+    "details": "yearn:vaultDetails",
+    "strategies": {
+      "@id": "yearn:strategies",
+      "@container": "@list"
+    },
+    "totalAssets": "yearn:totalAssets",
+    "tvl:value": {
+      "@id": "defi:totalValueLocked",
+      "@type": "xsd:decimal"
+    },
+    "price": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+    "netAPR": {
+      "@id": "yearn:netAPR",
+      "@type": "xsd:decimal"
+    },
+    "forwardAPR": "yearn:forwardAPR",
+    "fees": "yearn:fees",
+    "performance": "yearn:performanceFee",
+    "management": "yearn:managementFee",
+    "points": "yearn:aprPoints",
+    "weekAgo": "yearn:weekAgo",
+    "monthAgo": "yearn:monthAgo",
+    "inception": "yearn:inception",
+    "pricePerShare": "yearn:pricePerShare",
+    "isRetired": "yearn:isRetired",
+    "isHidden": "yearn:isHidden",
+    "isAggregator": "yearn:isAggregator",
+    "isBoosted": "yearn:isBoosted",
+    "isAutomated": "yearn:isAutomated",
+    "poolProvider": "yearn:poolProvider",
+    "stability": "yearn:stability",
+    "stableBaseAsset": "yearn:stableBaseAsset",
+    "status": "schema:status",
+    "totalDebt": "yearn:totalDebt",
+    "totalGain": "yearn:totalGain",
+    "totalLoss": "yearn:totalLoss",
+    "lastReport": {
+      "@id": "yearn:lastReport",
+      "@type": "xsd:integer"
+    },
+    "debtRatio": {
+      "@id": "yearn:debtRatio",
+      "@type": "xsd:decimal"
+    },
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/"
+  }
+}
