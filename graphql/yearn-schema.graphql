@@ -1,0 +1,740 @@
+# Yearn Finance Kong GraphQL Schema
+# Source: live introspection of https://kong.yearn.fi/api/gql
+# Captured: 2026-06-14
+
+scalar BigInt
+
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
+
+type Query {
+  bananas: String
+  latestBlocks: [LatestBlock]
+  monitor: Monitor
+  allocator: Allocator
+  vaults: [Vault]
+  vault: Vault
+  vaultAccounts: [AccountRole]
+  vaultReports: [VaultReport]
+  vaultStrategies: [Strategy]
+  prices: [Price]
+  projects: [Project]
+  riskScores: [RiskScoreLegacy]
+  strategies: [Strategy]
+  strategy: Strategy
+  strategyReports: [StrategyReport]
+  transfers: [Transfer]
+  deposits: [Deposit]
+  timeseries: [Output]
+  tvls: [Tvl]
+  accountRoles: [AccountRole]
+  accountVaults: [Vault]
+  accountStrategies: [Strategy]
+  accountants: [Accountant]
+  accountant: Accountant
+  things: [Thing]
+  tokens: [Erc20]
+  newSplitterLogs: [NewSplitterLog]
+  newYieldSplitterLogs: [NewYieldSplitterLog]
+  vestingEscrowCreatedLogs: [VestingEscrowCreatedLog]
+}
+
+type Erc20 {
+  chainId: Int
+  address: String
+  symbol: String
+  name: String
+  decimals: Int
+}
+
+type Reward {
+  chainId: Int
+  address: String
+  name: String
+  symbol: String
+  decimals: Int
+  balance: BigInt
+  balanceUsd: Float
+}
+
+type LenderStatus {
+  name: String
+  assets: BigInt
+  rate: BigInt
+  address: String
+}
+
+type RiskScoreLegacy {
+  label: String
+  auditScore: Float
+  codeReviewScore: Float
+  complexityScore: Float
+  protocolSafetyScore: Float
+  teamKnowledgeScore: Float
+  testingScore: Float
+}
+
+type RiskScore {
+  riskLevel: Int
+  riskScore: RiskScoreDetails
+}
+
+type RiskScoreDetails {
+  review: Int
+  testing: Int
+  complexity: Int
+  riskExposure: Int
+  protocolIntegration: Int
+  centralizationRisk: Int
+  externalProtocolAudit: Int
+  externalProtocolCentralisation: Int
+  externalProtocolTvl: Int
+  externalProtocolLongevity: Int
+  externalProtocolType: Int
+  comment: String
+}
+
+type TokenMeta {
+  type: String
+  icon: String
+  symbol: String
+  decimals: Int
+  displayName: String
+  displaySymbol: String
+  description: String
+  category: String
+}
+
+type SparklinePoint {
+  chainId: Int!
+  address: String!
+  label: String!
+  component: String
+  blockTime: BigInt!
+  close: Float!
+}
+
+type ReportDetail {
+  chainId: Int
+  address: String
+  blockNumber: BigInt
+  blockTime: BigInt
+  transactionHash: String
+  profit: BigInt
+  profitUsd: Float
+  loss: BigInt
+  lossUsd: Float
+  apr: Apr
+}
+
+type ReportApr {
+  gross: Float
+  net: Float
+}
+
+type Allocator {
+  chainId: Int!
+  address: String!
+  vault: String!
+}
+
+type VaultMetaMigration {
+  available: Boolean!
+  target: String
+  contract: String
+}
+
+type VaultMetaStability {
+  stability: String!
+  stableBaseAsset: String
+}
+
+type VaultMetaInclusion {
+  isYearn: Boolean
+  isGimme: Boolean
+  isPoolTogether: Boolean
+  isCove: Boolean
+  isMorpho: Boolean
+  isKatana: Boolean
+  isPublicERC4626: Boolean
+}
+
+type VaultMeta {
+  displayName: String
+  displaySymbol: String
+  description: String
+  type: String
+  kind: String
+  category: String
+  isRetired: Boolean
+  isHidden: Boolean
+  isAggregator: Boolean
+  isBoosted: Boolean
+  isAutomated: Boolean
+  isHighlighted: Boolean
+  isPool: Boolean
+  shouldUseV2APR: Boolean
+  protocols: [String]
+  migration: VaultMetaMigration
+  stability: VaultMetaStability
+  inclusion: VaultMetaInclusion
+  sourceURI: String
+  uiNotice: String
+  token: TokenMeta
+}
+
+type Debt {
+  strategy: String
+  performanceFee: BigInt
+  activation: BigInt
+  debtRatio: BigInt
+  minDebtPerHarvest: BigInt
+  maxDebtPerHarvest: BigInt
+  lastReport: BigInt
+  totalDebt: BigInt
+  totalDebtUsd: Float
+  totalGain: BigInt
+  totalGainUsd: Float
+  totalLoss: BigInt
+  totalLossUsd: Float
+  currentDebt: BigInt
+  currentDebtUsd: Float
+  maxDebt: BigInt
+  maxDebtUsd: Float
+  targetDebtRatio: Float
+  maxDebtRatio: Float
+}
+
+type Fees {
+  managementFee: Float
+  performanceFee: Float
+}
+
+type Locker {
+  cooldownDuration: Float
+  withdrawalWindow: Float
+  lockerBonus: Float
+}
+
+type Sparklines {
+  tvl: [SparklinePoint]
+  apy: [SparklinePoint]
+}
+
+type Role {
+  account: String!
+  roleMask: BigInt!
+}
+
+type Apy {
+  net: Float
+  pricePerShare: BigInt
+  weeklyNet: Float
+  weeklyPricePerShare: BigInt
+  monthlyNet: Float
+  monthlyPricePerShare: BigInt
+  inceptionNet: Float
+  grossApr: Float
+  blockNumber: String!
+  blockTime: String!
+}
+
+type Oracle {
+  apr: Float
+  netAPR: Float
+  apy: Float
+}
+
+type EstimatedAprComponents {
+  boost: Float
+  poolAPY: Float
+  boostedAPR: Float
+  baseAPR: Float
+  rewardsAPR: Float
+  rewardsAPY: Float
+  cvxAPR: Float
+  keepCRV: Float
+  keepVelo: Float
+  grossAPR: Float
+  baseNetAPR: Float
+  baseNetAPY: Float
+  lockerBonusAPR: Float
+  lockerBonusAPY: Float
+}
+
+type EstimatedApr {
+  apr: Float
+  apy: Float
+  type: String!
+  components: EstimatedAprComponents!
+}
+
+type Historical {
+  net: Float
+  weeklyNet: Float
+  monthlyNet: Float
+  inceptionNet: Float
+}
+
+type Performance {
+  oracle: Oracle
+  estimated: EstimatedApr
+  historical: Historical
+}
+
+type StakingReward {
+  address: String!
+  name: String!
+  symbol: String!
+  decimals: Int!
+  price: Float!
+  isFinished: Boolean!
+  finishedAt: BigInt!
+  apr: Float!
+  perWeek: Float!
+}
+
+type Staking {
+  address: String
+  available: Boolean
+  source: String
+  rewards: [StakingReward]
+}
+
+type Vault {
+  DOMAIN_SEPARATOR: String
+  FACTORY: String
+  accountant: String
+  activation: BigInt
+  address: String
+  apiVersion: String
+  asset: Erc20
+  availableDepositLimit: BigInt
+  category: Int
+  chainId: Int
+  creditAvailable: BigInt
+  debtOutstanding: BigInt
+  debtRatio: BigInt
+  decimals: BigInt
+  depositLimit: BigInt
+  deposit_limit: BigInt
+  deposit_limit_module: String
+  emergencyShutdown: Boolean
+  erc4626: Boolean
+  expectedReturn: BigInt
+  fullProfitUnlockDate: BigInt
+  future_role_manager: String
+  get_default_queue: [String]
+  governance: String
+  guardian: String
+  inceptTime: BigInt
+  inceptBlock: BigInt
+  isShutdown: Boolean
+  lastProfitUpdate: BigInt
+  lastReport: BigInt
+  lastReportDetail: ReportDetail
+  lockedProfit: BigInt
+  lockedProfitDegradation: BigInt
+  management: String
+  managementFee: BigInt
+  maxAvailableShares: BigInt
+  minimum_total_idle: BigInt
+  name: String
+  performanceFee: BigInt
+  pricePerShare: BigInt
+  profitMaxUnlockTime: BigInt
+  profitUnlockingRate: BigInt
+  projectId: String
+  projectName: String
+  registry: String
+  rewards: String
+  role_manager: String
+  symbol: String
+  token: String
+  totalAssets: BigInt
+  totalDebt: BigInt
+  totalIdle: BigInt
+  totalSupply: BigInt
+  total_supply: BigInt
+  unlockedShares: BigInt
+  use_default_queue: Boolean
+  vaultType: Int
+  withdraw_limit_module: String
+  withdrawalQueue: [String]
+  strategies: [String]
+  allocator: String
+  debts: [Debt]
+  fees: Fees
+  locker: Locker
+  risk: RiskScore
+  meta: VaultMeta
+  sparklines: Sparklines
+  tvl: SparklinePoint
+  apy: Apy
+  performance: Performance
+  roles: [Role]
+  v3: Boolean
+  yearn: Boolean
+  origin: String
+  staking: Staking
+}
+
+type VaultReport {
+  chainId: Int!
+  address: String!
+  eventName: String!
+  strategy: String!
+  gain: BigInt!
+  loss: BigInt!
+  debtPaid: BigInt
+  totalGain: BigInt
+  totalLoss: BigInt
+  totalDebt: BigInt
+  debtAdded: BigInt
+  debtRatio: BigInt
+  currentDebt: BigInt
+  protocolFees: BigInt
+  totalFees: BigInt
+  totalRefunds: BigInt
+  gainUsd: Float
+  lossUsd: Float
+  debtPaidUsd: Float
+  totalGainUsd: Float
+  totalLossUsd: Float
+  totalDebtUsd: Float
+  debtAddedUsd: Float
+  currentDebtUsd: Float
+  protocolFeesUsd: Float
+  totalFeesUsd: Float
+  totalRefundsUsd: Float
+  priceUsd: Float
+  priceSource: String
+  apr: ReportApr
+  blockNumber: Int!
+  blockTime: BigInt!
+  logIndex: Int!
+  transactionHash: String!
+}
+
+type StrategyMeta {
+  isRetired: Boolean
+  displayName: String
+  description: String
+  protocols: [String]
+}
+
+type Apr {
+  gross: Float
+  net: Float
+}
+
+type Strategy {
+  chainId: Int
+  address: String
+  apiVersion: String
+  balanceOfWant: BigInt
+  baseFeeOracle: String
+  creditThreshold: BigInt
+  crv: String
+  curveVoter: String
+  delegatedAssets: BigInt
+  doHealthCheck: Boolean
+  emergencyExit: Boolean
+  erc4626: Boolean
+  estimatedTotalAssets: BigInt
+  forceHarvestTriggerOnce: Boolean
+  gauge: String
+  healthCheck: String
+  inceptTime: BigInt
+  inceptBlock: BigInt
+  isActive: Boolean
+  isBaseFeeAcceptable: Boolean
+  isOriginal: Boolean
+  keeper: String
+  localKeepCRV: BigInt
+  maxReportDelay: BigInt
+  metadataURI: String
+  minReportDelay: BigInt
+  name: String
+  proxy: String
+  rewards: String
+  stakedBalance: BigInt
+  strategist: String
+  tradeFactory: String
+  vault: String
+  want: String
+  DOMAIN_SEPARATOR: String
+  FACTORY: String
+  MAX_FEE: Int
+  MIN_FEE: Int
+  decimals: Int
+  fullProfitUnlockDate: BigInt
+  isShutdown: Boolean
+  lastReport: BigInt
+  lastReportDetail: ReportDetail
+  management: String
+  pendingManagement: String
+  performanceFee: Int
+  performanceFeeRecipient: String
+  pricePerShare: BigInt
+  profitMaxUnlockTime: BigInt
+  profitUnlockingRate: BigInt
+  symbol: String
+  totalAssets: BigInt
+  totalDebt: BigInt
+  totalIdle: BigInt
+  totalSupply: BigInt
+  totalDebtUsd: Float
+  lenderStatuses: [LenderStatus]
+  claims: [Reward]
+  risk: RiskScoreLegacy
+  meta: StrategyMeta
+  v3: Boolean
+  yearn: Boolean
+  origin: String
+  sparklines: Sparklines
+  tvl: SparklinePoint
+  apy: Apy
+}
+
+type StrategyReport {
+  chainId: Int!
+  address: String!
+  eventName: String!
+  profit: BigInt!
+  loss: BigInt!
+  debtPayment: BigInt
+  debtOutstanding: BigInt
+  protocolFees: BigInt
+  performanceFees: BigInt
+  apr: ReportApr
+  profitUsd: Float
+  lossUsd: Float
+  debtPaymentUsd: Float
+  debtOutstandingUsd: Float
+  protocolFeesUsd: Float
+  performanceFeesUsd: Float
+  priceUsd: Float
+  priceSource: String
+  blockNumber: Int!
+  blockTime: BigInt!
+  logIndex: Int!
+  transactionHash: String!
+}
+
+type Transfer {
+  chainId: Int!
+  address: String!
+  sender: String!
+  receiver: String!
+  value: Float!
+  valueUsd: Float
+  blockNumber: BigInt!
+  blockTime: BigInt!
+  logIndex: Int!
+  transactionHash: String!
+}
+
+type Deposit {
+  chainId: Int!
+  vaultAddress: String!
+  amount: String!
+  shares: String!
+  recipient: String!
+}
+
+type Output {
+  chainId: Int!
+  address: String!
+  label: String!
+  component: String
+  value: Float!
+  period: String!
+  time: BigInt
+}
+
+type Tvl {
+  chainId: Int!
+  address: String!
+  value: Float!
+  priceUsd: Float
+  priceSource: String!
+  period: String!
+  blockNumber: Int!
+  time: BigInt
+}
+
+type Price {
+  chainId: Int!
+  address: String!
+  priceUsd: Float!
+  priceSource: String!
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
+
+type LatestBlock {
+  chainId: Int!
+  blockNumber: BigInt!
+  blockTime: BigInt!
+}
+
+type Monitor {
+  queues: [QueueStatus]
+  redis: RedisInfo!
+  db: DbInfo!
+  ingest: IngestInfo!
+  indexStatsJson: String!
+}
+
+type QueueStatus {
+  name: String!
+  waiting: Int!
+  active: Int!
+  failed: Int!
+}
+
+type RedisMemory {
+  total: BigInt!
+  used: BigInt!
+  peak: BigInt!
+  fragmentation: Float!
+}
+
+type RedisInfo {
+  version: String!
+  mode: String
+  os: String!
+  uptime: Int!
+  clients: Int!
+  memory: RedisMemory!
+}
+
+type DbInfo {
+  clients: Int!
+  databaseSize: BigInt!
+  indexHitRate: Float!
+  cacheHitRate: Float!
+}
+
+type NetworkStat {
+  chainId: Int!
+  count: Int!
+}
+
+type ApetaxStat {
+  stealth: Int!
+  new: Int!
+  active: Int!
+  withdraw: Int!
+}
+
+type IngestCpu {
+  usage: Float!
+}
+
+type IngestMemory {
+  total: BigInt!
+  used: BigInt!
+}
+
+type IngestInfo {
+  cpu: IngestCpu!
+  memory: IngestMemory!
+}
+
+type AccountRole {
+  chainId: Int!
+  address: String!
+  account: String!
+  roleMask: BigInt!
+}
+
+type Accountant {
+  chainId: Int!
+  address: String!
+  feeManager: String!
+  feeRecipient: String!
+  futureFeeManager: String
+  managementFeeThreshold: BigInt
+  performanceFeeThreshold: BigInt
+  maxLoss: BigInt
+  vaultManager: String
+  vaults: [String]
+}
+
+type Thing {
+  chainId: Int!
+  address: String!
+  label: String!
+}
+
+type Project {
+  chainId: Int!
+  id: String!
+  name: String!
+  roleManager: String!
+  registry: String!
+  accountant: String!
+  debtAllocator: String!
+  roleManagerFactory: String!
+  governance: String!
+}
+
+type RoleManager {
+  chainId: Int!
+  address: String!
+  roleManagerFactory: String!
+  project: Project!
+  chad: String!
+  defaultProfitMaxUnlock: BigInt!
+  accountant: String!
+  allocatorFactory: String!
+  brain: String!
+  brainRoles: BigInt!
+  daddy: String!
+  daddyRoles: BigInt!
+  debtAllocator: String!
+  debtAllocatorRoles: BigInt!
+  keeper: String!
+  keeperRoles: BigInt!
+  registry: String!
+  security: String!
+  securityRoles: BigInt!
+  strategyManager: String!
+  strategyManagerRoles: BigInt!
+  governance: String!
+  pendingGovernance: String!
+}
+
+type NewSplitterLog {
+  chainId: Int!
+  address: String!
+  splitter: String!
+  manager: String!
+  managerRecipient: String!
+  splitee: String!
+}
+
+type NewYieldSplitterLog {
+  chainId: Int!
+  address: String!
+  splitter: String!
+  vault: String!
+  want: String!
+}
+
+type VestingEscrowCreatedLog {
+  chainId: Int!
+  funder: String!
+  token: Erc20!
+  recipient: String!
+  escrow: String!
+  amount: BigInt!
+  vestingStart: BigInt!
+  vestingDuration: BigInt!
+  cliffLength: BigInt!
+  openClaim: Boolean!
+}

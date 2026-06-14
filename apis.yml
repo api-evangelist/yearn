@@ -1,156 +1,148 @@
 name: Yearn Finance
-description: >-
-  Yearn Finance is a DeFi yield aggregator that automates yield farming strategies
-  across EVM-compatible networks. It provides REST and GraphQL APIs for accessing
-  vault data, APY rates, strategy information, user positions, TVL metrics, and
-  protocol analytics across Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum.
+description: Yearn Finance is a DeFi yield aggregator that automates yield farming
+  strategies across EVM-compatible networks. It provides REST and GraphQL APIs for
+  accessing vault data, APY rates, strategy information, user positions, TVL metrics,
+  and protocol analytics across Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum.
 image: https://yearn.fi/logo.svg
 tags:
-  - DeFi
-  - Yield Aggregator
-  - Vaults
-  - EVM
-  - Web3
-  - Blockchain
-  - Finance
+- DeFi
+- Yield Aggregator
+- Vaults
+- EVM
+- Web3
+- Blockchain
+- Finance
 url: https://yearn.fi
 apis:
-  - name: yDaemon REST API
-    description: >-
-      The primary REST API for Yearn Finance providing access to vault data,
-      APY calculations, TVL metrics, strategy information, and protocol analytics
-      across all supported EVM networks. Used by the production Yearn frontends.
+- name: yDaemon REST API
+  description: The primary REST API for Yearn Finance providing access to vault data,
+    APY calculations, TVL metrics, strategy information, and protocol analytics across
+    all supported EVM networks. Used by the production Yearn frontends.
+  humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
+  baseURL: https://ydaemon.yearn.fi
+  tags:
+  - Vaults
+  - APY
+  - TVL
+  - Strategies
+  - DeFi
+  properties:
+  - type: Documentation
+    url: https://docs.yearn.fi/developers/data-services/yearn-data
+  - type: OpenAPI
+    url: https://ydaemon.yearn.fi/docs
+  - type: GitHubRepository
+    url: https://github.com/yearn/ydaemon
+  - url: graphql/yearn-graphql.md
+    type: GraphQL
+  contact:
+  - FN: Yearn Finance
+    email: ''
+    X-twitter: iearnfinance
+  apis:
+  - name: Get All Vaults
+    description: Retrieve all vaults for a specified chain ID. Supports pagination,
+      ordering, and filtering by strategy conditions and details.
     humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
     baseURL: https://ydaemon.yearn.fi
+    path: /{chainID}/vaults/all
+    method: GET
     tags:
-      - Vaults
-      - APY
-      - TVL
-      - Strategies
-      - DeFi
+    - Vaults
+    - Chains
     properties:
-      - type: Documentation
-        url: https://docs.yearn.fi/developers/data-services/yearn-data
-      - type: OpenAPI
-        url: https://ydaemon.yearn.fi/docs
-      - type: GitHubRepository
-        url: https://github.com/yearn/ydaemon
-    contact:
-      - FN: Yearn Finance
-        email: ''
-        X-twitter: iearnfinance
-    apis:
-      - name: Get All Vaults
-        description: >-
-          Retrieve all vaults for a specified chain ID. Supports pagination,
-          ordering, and filtering by strategy conditions and details.
-        humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
-        baseURL: https://ydaemon.yearn.fi
-        path: /{chainID}/vaults/all
-        method: GET
-        tags:
-          - Vaults
-          - Chains
-        properties:
-          - type: Documentation
-            url: https://docs.yearn.fi/developers/data-services/yearn-data
-      - name: Get Vault by Address
-        description: >-
-          Retrieve data for a single vault by chain ID and contract address.
-          Returns vault metadata, APY, TVL, strategy details, and token information.
-        humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
-        baseURL: https://ydaemon.yearn.fi
-        path: /{chainID}/vaults/{address}
-        method: GET
-        tags:
-          - Vaults
-        properties:
-          - type: Documentation
-            url: https://docs.yearn.fi/developers/data-services/yearn-data
-      - name: Get Vaults TVL
-        description: >-
-          Returns Total Value Locked metrics for all vaults on a specified chain.
-        humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
-        baseURL: https://ydaemon.yearn.fi
-        path: /{chainID}/vaults/tvl
-        method: GET
-        tags:
-          - TVL
-          - Analytics
-        properties:
-          - type: Documentation
-            url: https://docs.yearn.fi/developers/data-services/yearn-data
-      - name: Get Supported Chains
-        description: >-
-          Returns the list of blockchain networks supported by the yDaemon API,
-          including Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum.
-        humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
-        baseURL: https://ydaemon.yearn.fi
-        path: /info/chains
-        method: GET
-        tags:
-          - Chains
-          - Info
-        properties:
-          - type: Documentation
-            url: https://docs.yearn.fi/developers/data-services/yearn-data
-      - name: Get Blacklisted Vaults
-        description: >-
-          Returns the list of vaults blacklisted and excluded from results
-          across all supported networks.
-        humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
-        baseURL: https://ydaemon.yearn.fi
-        path: /info/vaults/blacklisted
-        method: GET
-        tags:
-          - Vaults
-          - Info
-        properties:
-          - type: Documentation
-            url: https://docs.yearn.fi/developers/data-services/yearn-data
-
-  - name: Kong GraphQL API
-    description: >-
-      An integrated indexing service and GraphQL API providing comprehensive
-      data on Yearn V2 and V3 vault ecosystems, including contract snapshots,
-      event histories, vault-strategy relationships, fees, rewards, APY,
-      and TVL timeseries data.
+    - type: Documentation
+      url: https://docs.yearn.fi/developers/data-services/yearn-data
+  - name: Get Vault by Address
+    description: Retrieve data for a single vault by chain ID and contract address.
+      Returns vault metadata, APY, TVL, strategy details, and token information.
+    humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
+    baseURL: https://ydaemon.yearn.fi
+    path: /{chainID}/vaults/{address}
+    method: GET
+    tags:
+    - Vaults
+    properties:
+    - type: Documentation
+      url: https://docs.yearn.fi/developers/data-services/yearn-data
+  - name: Get Vaults TVL
+    description: Returns Total Value Locked metrics for all vaults on a specified
+      chain.
+    humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
+    baseURL: https://ydaemon.yearn.fi
+    path: /{chainID}/vaults/tvl
+    method: GET
+    tags:
+    - TVL
+    - Analytics
+    properties:
+    - type: Documentation
+      url: https://docs.yearn.fi/developers/data-services/yearn-data
+  - name: Get Supported Chains
+    description: Returns the list of blockchain networks supported by the yDaemon
+      API, including Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum.
+    humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
+    baseURL: https://ydaemon.yearn.fi
+    path: /info/chains
+    method: GET
+    tags:
+    - Chains
+    - Info
+    properties:
+    - type: Documentation
+      url: https://docs.yearn.fi/developers/data-services/yearn-data
+  - name: Get Blacklisted Vaults
+    description: Returns the list of vaults blacklisted and excluded from results
+      across all supported networks.
+    humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
+    baseURL: https://ydaemon.yearn.fi
+    path: /info/vaults/blacklisted
+    method: GET
+    tags:
+    - Vaults
+    - Info
+    properties:
+    - type: Documentation
+      url: https://docs.yearn.fi/developers/data-services/yearn-data
+- name: Kong GraphQL API
+  description: An integrated indexing service and GraphQL API providing comprehensive
+    data on Yearn V2 and V3 vault ecosystems, including contract snapshots, event
+    histories, vault-strategy relationships, fees, rewards, APY, and TVL timeseries
+    data.
+  humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
+  baseURL: https://kong.yearn.fi
+  tags:
+  - GraphQL
+  - Vaults
+  - Analytics
+  - Strategies
+  - Events
+  properties:
+  - type: Documentation
+    url: https://docs.yearn.fi/developers/data-services/yearn-data
+  - type: GitHubRepository
+    url: https://github.com/yearn/kong
+  contact:
+  - FN: Yearn Finance
+    email: ''
+    X-twitter: iearnfinance
+  apis:
+  - name: Kong GraphQL Query
+    description: GraphQL endpoint for querying Yearn V2 and V3 vault ecosystem data
+      including snapshots, events, APY timeseries, TVL, strategies, fees, rewards,
+      and vault metadata.
     humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
     baseURL: https://kong.yearn.fi
+    path: /api/gql
+    method: POST
     tags:
-      - GraphQL
-      - Vaults
-      - Analytics
-      - Strategies
-      - Events
+    - GraphQL
+    - Vaults
+    - Analytics
     properties:
-      - type: Documentation
-        url: https://docs.yearn.fi/developers/data-services/yearn-data
-      - type: GitHubRepository
-        url: https://github.com/yearn/kong
-    contact:
-      - FN: Yearn Finance
-        email: ''
-        X-twitter: iearnfinance
-    apis:
-      - name: Kong GraphQL Query
-        description: >-
-          GraphQL endpoint for querying Yearn V2 and V3 vault ecosystem data
-          including snapshots, events, APY timeseries, TVL, strategies, fees,
-          rewards, and vault metadata.
-        humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
-        baseURL: https://kong.yearn.fi
-        path: /api/gql
-        method: POST
-        tags:
-          - GraphQL
-          - Vaults
-          - Analytics
-        properties:
-          - type: Documentation
-            url: https://docs.yearn.fi/developers/data-services/yearn-data
-
+    - type: Documentation
+      url: https://docs.yearn.fi/developers/data-services/yearn-data
 modified: 2026-06-13
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
