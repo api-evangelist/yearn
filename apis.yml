@@ -146,3 +146,6 @@ modified: 2026-06-13
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+common:
+- type: DomainSecurity
+  url: security/yearn-domain-security.yml
