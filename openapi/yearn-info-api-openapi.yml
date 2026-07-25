@@ -1,0 +1,126 @@
+openapi: 3.1.0
+info:
+  title: Yearn Finance yDaemon REST Chains Info API
+  description: The primary REST API for Yearn Finance, providing access to vault data, APY calculations, TVL metrics, strategy information, and protocol analytics across all supported EVM networks including Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum. Used by the production Yearn frontends.
+  version: 1.0.0
+  contact:
+    name: Yearn Finance
+    url: https://yearn.fi
+  license:
+    name: GNU Affero General Public License v3.0
+    url: https://github.com/yearn/ydaemon/blob/main/LICENSE
+  x-twitter: iearnfinance
+servers:
+- url: https://ydaemon.yearn.fi
+  description: Production yDaemon API
+tags:
+- name: Info
+  description: Protocol information and metadata
+paths:
+  /info/chains:
+    get:
+      operationId: getSupportedChains
+      summary: Get supported chains
+      description: Returns the list of blockchain networks supported by the yDaemon API, including Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum, along with their RPC and contract configuration data.
+      tags:
+      - Info
+      responses:
+        '200':
+          description: An object mapping chain IDs to chain configuration data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChainsResponse'
+  /info/vaults/blacklisted:
+    get:
+      operationId: getBlacklistedVaults
+      summary: Get blacklisted vaults
+      description: Returns the list of vault contract addresses that are blacklisted and excluded from results across all supported networks.
+      tags:
+      - Info
+      responses:
+        '200':
+          description: An array of blacklisted vault contract addresses.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  pattern: ^0x[a-fA-F0-9]{40}$
+                  description: EVM contract address of a blacklisted vault.
+                example:
+                - '0x6884bd538db61a626da0a05e10807bfc5aea2b32'
+                - '0xdb8bbf2b0e28721f9bac603e687e39bcf52201f8'
+components:
+  schemas:
+    ChainInfo:
+      type: object
+      description: Configuration and metadata for a supported EVM chain.
+      properties:
+        ID:
+          type: integer
+          description: EVM chain ID.
+          example: 1
+        RpcURI:
+          type: string
+          format: uri
+          description: RPC endpoint URI for the chain.
+        SubgraphURI:
+          type: string
+          format: uri
+          description: The Graph subgraph URI for the chain.
+        EtherscanURI:
+          type: string
+          format: uri
+          description: Etherscan-compatible API URI.
+        MaxBlockRange:
+          type: integer
+          description: Maximum block range for log queries.
+        MaxBatchSize:
+          type: integer
+          description: Maximum batch size for multicall requests.
+        AvgBlocksPerDay:
+          type: integer
+          description: Average number of blocks per day on this chain.
+        CanUseWebsocket:
+          type: boolean
+          description: Whether WebSocket connections are supported.
+        LensContract:
+          $ref: '#/components/schemas/ChainContract'
+        MulticallContract:
+          $ref: '#/components/schemas/ChainContract'
+        YBribeV3Contract:
+          $ref: '#/components/schemas/ChainContract'
+    ChainContract:
+      type: object
+      description: A smart contract deployed on a chain.
+      properties:
+        Address:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+          description: Contract address.
+        Block:
+          type: integer
+          description: Block number at which the contract was deployed.
+        Version:
+          type: integer
+          description: Contract version number.
+        Tag:
+          type: string
+          description: Optional tag label for the contract.
+        Label:
+          type: string
+          description: Optional human-readable label.
+    ChainsResponse:
+      type: object
+      description: Map of chain IDs to chain configuration objects.
+      properties:
+        chains:
+          type: object
+          description: An object where each key is a chain ID string and the value is a ChainInfo object.
+          additionalProperties:
+            $ref: '#/components/schemas/ChainInfo'
+externalDocs:
+  description: Yearn Finance Developer Documentation
+  url: https://docs.yearn.fi/developers/data-services/yearn-data

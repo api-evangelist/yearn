@@ -1,0 +1,83 @@
+openapi: 3.1.0
+info:
+  title: Yearn Finance yDaemon REST Chains TVL API
+  description: The primary REST API for Yearn Finance, providing access to vault data, APY calculations, TVL metrics, strategy information, and protocol analytics across all supported EVM networks including Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum. Used by the production Yearn frontends.
+  version: 1.0.0
+  contact:
+    name: Yearn Finance
+    url: https://yearn.fi
+  license:
+    name: GNU Affero General Public License v3.0
+    url: https://github.com/yearn/ydaemon/blob/main/LICENSE
+  x-twitter: iearnfinance
+servers:
+- url: https://ydaemon.yearn.fi
+  description: Production yDaemon API
+tags:
+- name: TVL
+  description: Total Value Locked metrics
+paths:
+  /{chainID}/vaults/tvl:
+    get:
+      operationId: getVaultsTVL
+      summary: Get total TVL for a chain
+      description: Returns the Total Value Locked (in USD) aggregated across all vaults on the specified chain.
+      tags:
+      - TVL
+      parameters:
+      - $ref: '#/components/parameters/chainID'
+      responses:
+        '200':
+          description: Total Value Locked as a numeric USD value.
+          content:
+            application/json:
+              schema:
+                type: number
+                format: double
+                description: Total Value Locked in USD across all vaults on the chain.
+                example: 181230031.34
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    BadRequest:
+      description: Bad Request - invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found - the requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    chainID:
+      name: chainID
+      in: path
+      required: true
+      description: 'The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum).'
+      schema:
+        type: integer
+        example: 1
+        enum:
+        - 1
+        - 10
+        - 137
+        - 250
+        - 8453
+        - 42161
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: not found
+externalDocs:
+  description: Yearn Finance Developer Documentation
+  url: https://docs.yearn.fi/developers/data-services/yearn-data
