@@ -1,0 +1,816 @@
+openapi: 3.1.0
+info:
+  title: Yearn Finance yDaemon REST API
+  description: >-
+    The primary REST API for Yearn Finance, providing access to vault data, APY
+    calculations, TVL metrics, strategy information, and protocol analytics
+    across all supported EVM networks including Ethereum, Optimism, Polygon,
+    Fantom, Base, and Arbitrum. Used by the production Yearn frontends.
+  version: 1.0.0
+  contact:
+    name: Yearn Finance
+    url: https://yearn.fi
+  license:
+    name: GNU Affero General Public License v3.0
+    url: https://github.com/yearn/ydaemon/blob/main/LICENSE
+  x-twitter: iearnfinance
+servers:
+  - url: https://ydaemon.yearn.fi
+    description: Production yDaemon API
+externalDocs:
+  description: Yearn Finance Developer Documentation
+  url: https://docs.yearn.fi/developers/data-services/yearn-data
+tags:
+  - name: Vaults
+    description: Endpoints for querying Yearn vault data
+  - name: TVL
+    description: Total Value Locked metrics
+  - name: Info
+    description: Protocol information and metadata
+  - name: Chains
+    description: Supported blockchain network information
+paths:
+  /{chainID}/vaults/all:
+    get:
+      operationId: getAllVaults
+      summary: Get all vaults for a chain
+      description: >-
+        Retrieve all vaults for a specified chain ID. Supports pagination,
+        ordering, and filtering by strategy conditions and details. Returns
+        vaults matching the IsYearn inclusion filter by default.
+      tags:
+        - Vaults
+      parameters:
+        - $ref: '#/components/parameters/chainID'
+        - name: orderBy
+          in: query
+          description: Determines the order of returned vaults.
+          schema:
+            type: string
+            default: featuringScore
+            example: featuringScore
+        - name: orderDirection
+          in: query
+          description: Determines the direction of ordering.
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+            default: asc
+        - name: strategiesCondition
+          in: query
+          description: Filters strategies based on specified condition.
+          schema:
+            type: string
+            enum:
+              - inQueue
+              - debtLimit
+              - debtRatio
+              - absolute
+              - all
+            default: debtRatio
+        - name: hideAlways
+          in: query
+          description: If true, hides certain vaults.
+          schema:
+            type: boolean
+            default: false
+        - name: migrable
+          in: query
+          description: Filters vaults based on migration status.
+          schema:
+            type: string
+            enum:
+              - none
+              - all
+              - nodust
+              - ignore
+            default: none
+        - name: page
+          in: query
+          description: Page number for pagination.
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+        - name: limit
+          in: query
+          description: Number of vaults per page.
+          schema:
+            type: integer
+            default: 200
+            minimum: 1
+            maximum: 1000
+        - name: chainIDs
+          in: query
+          description: Comma-separated list of chain IDs to filter vaults.
+          schema:
+            type: string
+            example: "1,10,137"
+      responses:
+        '200':
+          description: An array of vault objects for the specified chain.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vault'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /{chainID}/vaults/{address}:
+    get:
+      operationId: getVaultByAddress
+      summary: Get vault by address
+      description: >-
+        Retrieve data for a single vault by chain ID and contract address.
+        Returns vault metadata, APY, TVL, strategy details, and token
+        information.
+      tags:
+        - Vaults
+      parameters:
+        - $ref: '#/components/parameters/chainID'
+        - name: address
+          in: path
+          required: true
+          description: The EVM contract address of the vault.
+          schema:
+            type: string
+            pattern: '^0x[a-fA-F0-9]{40}$'
+            example: "0x8176b059BD8f63aeB7e20282b12D243b4626E2AE"
+        - name: strategiesCondition
+          in: query
+          description: Filters strategies based on specified condition.
+          schema:
+            type: string
+            enum:
+              - inQueue
+              - debtLimit
+              - debtRatio
+              - absolute
+              - all
+            default: debtRatio
+      responses:
+        '200':
+          description: A vault object with full metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vault'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /{chainID}/vaults/tvl:
+    get:
+      operationId: getVaultsTVL
+      summary: Get total TVL for a chain
+      description: >-
+        Returns the Total Value Locked (in USD) aggregated across all vaults
+        on the specified chain.
+      tags:
+        - TVL
+      parameters:
+        - $ref: '#/components/parameters/chainID'
+      responses:
+        '200':
+          description: Total Value Locked as a numeric USD value.
+          content:
+            application/json:
+              schema:
+                type: number
+                format: double
+                description: Total Value Locked in USD across all vaults on the chain.
+                example: 181230031.34
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /{chainID}/vaults/v2:
+    get:
+      operationId: getV2Vaults
+      summary: Get all V2 vaults for a chain
+      description: >-
+        Returns all V2 vaults matching the IsYearn inclusion filter.
+        Filters vaults where the major version number is not 3.
+      tags:
+        - Vaults
+      parameters:
+        - $ref: '#/components/parameters/chainID'
+        - $ref: '#/components/parameters/orderBy'
+        - $ref: '#/components/parameters/orderDirection'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: An array of V2 vault objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vault'
+  /{chainID}/vaults/v3:
+    get:
+      operationId: getV3Vaults
+      summary: Get all V3 vaults for a chain
+      description: >-
+        Returns all V3 vaults matching the IsYearn inclusion filter.
+        Filters vaults where the kind is Multiple or Single, or the major
+        version number is 3.
+      tags:
+        - Vaults
+      parameters:
+        - $ref: '#/components/parameters/chainID'
+        - $ref: '#/components/parameters/orderBy'
+        - $ref: '#/components/parameters/orderDirection'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: An array of V3 vault objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vault'
+  /{chainID}/vaults/retired:
+    get:
+      operationId: getRetiredVaults
+      summary: Get all retired vaults for a chain
+      description: >-
+        Returns all retired vaults. Filters vaults where the
+        Metadata.IsRetired flag is true.
+      tags:
+        - Vaults
+      parameters:
+        - $ref: '#/components/parameters/chainID'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: An array of retired vault objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vault'
+  /{chainID}/vaults/detected:
+    get:
+      operationId: getDetectedVaults
+      summary: Get all detected vaults for a chain
+      description: Returns all detected vaults regardless of inclusion filter.
+      tags:
+        - Vaults
+      parameters:
+        - $ref: '#/components/parameters/chainID'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: An array of detected vault objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vault'
+  /info/chains:
+    get:
+      operationId: getSupportedChains
+      summary: Get supported chains
+      description: >-
+        Returns the list of blockchain networks supported by the yDaemon API,
+        including Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum,
+        along with their RPC and contract configuration data.
+      tags:
+        - Chains
+        - Info
+      responses:
+        '200':
+          description: An object mapping chain IDs to chain configuration data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChainsResponse'
+  /info/vaults/blacklisted:
+    get:
+      operationId: getBlacklistedVaults
+      summary: Get blacklisted vaults
+      description: >-
+        Returns the list of vault contract addresses that are blacklisted and
+        excluded from results across all supported networks.
+      tags:
+        - Vaults
+        - Info
+      responses:
+        '200':
+          description: An array of blacklisted vault contract addresses.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  pattern: '^0x[a-fA-F0-9]{40}$'
+                  description: EVM contract address of a blacklisted vault.
+                example:
+                  - "0x6884bd538db61a626da0a05e10807bfc5aea2b32"
+                  - "0xdb8bbf2b0e28721f9bac603e687e39bcf52201f8"
+components:
+  parameters:
+    chainID:
+      name: chainID
+      in: path
+      required: true
+      description: >-
+        The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism),
+        137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum).
+      schema:
+        type: integer
+        example: 1
+        enum:
+          - 1
+          - 10
+          - 137
+          - 250
+          - 8453
+          - 42161
+    orderBy:
+      name: orderBy
+      in: query
+      description: Determines the order of returned vaults.
+      schema:
+        type: string
+        default: featuringScore
+    orderDirection:
+      name: orderDirection
+      in: query
+      description: Determines the direction of ordering.
+      schema:
+        type: string
+        enum:
+          - asc
+          - desc
+        default: asc
+    page:
+      name: page
+      in: query
+      description: Page number for pagination.
+      schema:
+        type: integer
+        default: 1
+        minimum: 1
+    limit:
+      name: limit
+      in: query
+      description: Number of vaults per page.
+      schema:
+        type: integer
+        default: 200
+        minimum: 1
+        maximum: 1000
+  responses:
+    BadRequest:
+      description: Bad Request - invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found - the requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: "not found"
+    VaultToken:
+      type: object
+      description: The underlying token accepted by the vault.
+      properties:
+        address:
+          type: string
+          pattern: '^0x[a-fA-F0-9]{40}$'
+          description: Contract address of the underlying token.
+          example: "0x0CD6f267b2086bea681E922E19D40512511BE538"
+        underlyingTokensAddresses:
+          type: array
+          items:
+            type: string
+            pattern: '^0x[a-fA-F0-9]{40}$'
+          description: Addresses of tokens composing an LP token.
+        name:
+          type: string
+          description: Name of the underlying token.
+          example: "Curve crvUSD-FRAX Pool"
+        symbol:
+          type: string
+          description: Symbol of the underlying token.
+          example: "crvUSDFRAX-f"
+        type:
+          type: string
+          description: Type classification of the token (e.g. Curve LP, ERC-20).
+          example: "Curve LP"
+        display_name:
+          type: string
+          description: Human-readable display name for the token.
+        display_symbol:
+          type: string
+          description: Human-readable display symbol.
+        description:
+          type: string
+          description: Markdown description of the token.
+        icon:
+          type: string
+          format: uri
+          description: URL of the token icon image.
+        decimals:
+          type: integer
+          description: Number of decimals for the token.
+          example: 18
+    VaultTVL:
+      type: object
+      description: Total Value Locked metrics for the vault.
+      properties:
+        totalAssets:
+          type: string
+          description: Raw total assets in the vault as a string integer (wei).
+          example: "1287176248097615589"
+        tvl:
+          type: number
+          format: double
+          description: Total Value Locked in USD.
+          example: 1.29
+        price:
+          type: number
+          format: double
+          description: Price of the underlying token in USD.
+          example: 1.005
+    VaultAPRFees:
+      type: object
+      description: Fee structure for the vault.
+      properties:
+        performance:
+          type: number
+          format: double
+          description: Performance fee as a decimal (e.g. 0.1 = 10%).
+          example: 0.1
+        management:
+          type: number
+          format: double
+          description: Management fee as a decimal.
+          example: 0.0
+    VaultAPRPoints:
+      type: object
+      description: Historical APR data points.
+      properties:
+        weekAgo:
+          type: number
+          format: double
+          description: Net APR one week ago.
+        monthAgo:
+          type: number
+          format: double
+          description: Net APR one month ago.
+        inception:
+          type: number
+          format: double
+          description: Net APR since vault inception.
+    VaultAPRPricePerShare:
+      type: object
+      description: Price per share at different time points.
+      properties:
+        today:
+          type: number
+          format: double
+        weekAgo:
+          type: number
+          format: double
+        monthAgo:
+          type: number
+          format: double
+    VaultForwardAPRComposite:
+      type: object
+      description: Composite breakdown of forward APR components.
+      properties:
+        boost:
+          type: number
+          format: double
+        poolAPY:
+          type: number
+          format: double
+        boostedAPR:
+          type: number
+          format: double
+        baseAPR:
+          type: number
+          format: double
+        cvxAPR:
+          type: number
+          format: double
+        rewardsAPR:
+          type: number
+          format: double
+    VaultForwardAPR:
+      type: object
+      description: Forward-looking APR estimate.
+      properties:
+        type:
+          type: string
+          description: Strategy type used for the forward APR calculation.
+          example: "crv"
+        netAPR:
+          type: number
+          format: double
+          description: Net forward APR as a decimal.
+        composite:
+          $ref: '#/components/schemas/VaultForwardAPRComposite'
+    VaultAPRExtra:
+      type: object
+      description: Additional APR components from external sources.
+      properties:
+        stakingRewardsAPR:
+          type: number
+          format: double
+          nullable: true
+        gammaRewardAPR:
+          type: number
+          format: double
+          nullable: true
+    VaultAPR:
+      type: object
+      description: Annual Percentage Rate data for the vault.
+      properties:
+        type:
+          type: string
+          description: APR calculation method.
+          example: "v2:averaged"
+        netAPR:
+          type: number
+          format: double
+          description: Current net APR as a decimal (e.g. 0.05 = 5%).
+        fees:
+          $ref: '#/components/schemas/VaultAPRFees'
+        points:
+          $ref: '#/components/schemas/VaultAPRPoints'
+        pricePerShare:
+          $ref: '#/components/schemas/VaultAPRPricePerShare'
+        extra:
+          $ref: '#/components/schemas/VaultAPRExtra'
+        forwardAPR:
+          $ref: '#/components/schemas/VaultForwardAPR'
+    VaultDetails:
+      type: object
+      description: Additional metadata and classification details for the vault.
+      properties:
+        isRetired:
+          type: boolean
+          description: Whether the vault is retired.
+        isHidden:
+          type: boolean
+          description: Whether the vault is hidden from the UI.
+        isAggregator:
+          type: boolean
+          description: Whether the vault is an aggregator type.
+        isBoosted:
+          type: boolean
+          description: Whether the vault has boosted rewards.
+        isAutomated:
+          type: boolean
+          description: Whether the vault uses automated strategies.
+        isHighlighted:
+          type: boolean
+          description: Whether the vault is highlighted/featured.
+        isPool:
+          type: boolean
+          description: Whether the underlying token is a liquidity pool token.
+        poolProvider:
+          type: string
+          description: Name of the liquidity pool provider (e.g. Curve, Balancer).
+          example: "Curve"
+        stability:
+          type: string
+          description: Stability classification of the vault assets.
+          example: "Stable"
+        category:
+          type: string
+          description: Asset category classification.
+          example: "Stablecoin"
+        stableBaseAsset:
+          type: string
+          description: Base asset for stable vaults.
+          example: "USD"
+    VaultStrategyDetails:
+      type: object
+      description: Detailed metrics for a vault strategy.
+      properties:
+        totalDebt:
+          type: string
+          description: Total debt allocated to this strategy (in token wei).
+        totalLoss:
+          type: string
+          description: Total loss incurred by this strategy.
+        totalGain:
+          type: string
+          description: Total gain generated by this strategy.
+        performanceFee:
+          type: number
+          format: double
+          description: Performance fee charged by this strategy.
+        lastReport:
+          type: integer
+          description: Unix timestamp of the last harvest report.
+        debtRatio:
+          type: number
+          format: double
+          description: Fraction of vault assets allocated to this strategy.
+    VaultStrategy:
+      type: object
+      description: A strategy allocated to the vault.
+      properties:
+        address:
+          type: string
+          pattern: '^0x[a-fA-F0-9]{40}$'
+          description: Contract address of the strategy.
+          example: "0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641"
+        name:
+          type: string
+          description: Name of the strategy.
+          example: "StrategyCurveBoostedFactory-crvUSDFRAX-f"
+        status:
+          type: string
+          description: Current status of the strategy.
+          enum:
+            - active
+            - inactive
+            - retired
+          example: "active"
+        details:
+          $ref: '#/components/schemas/VaultStrategyDetails'
+    Vault:
+      type: object
+      description: A Yearn Finance vault with full metadata.
+      properties:
+        address:
+          type: string
+          pattern: '^0x[a-fA-F0-9]{40}$'
+          description: Contract address of the vault.
+          example: "0x8176b059BD8f63aeB7e20282b12D243b4626E2AE"
+        type:
+          type: string
+          description: Vault type classification.
+          example: "Automated Yearn Vault"
+        kind:
+          type: string
+          description: Vault kind (Legacy, Multiple, Single).
+          enum:
+            - Legacy
+            - Multiple
+            - Single
+          example: "Legacy"
+        symbol:
+          type: string
+          description: Vault token symbol.
+          example: "yvCurve-FRAX-crvUSD-f"
+        displaySymbol:
+          type: string
+          description: Display symbol used in UIs.
+        formatedSymbol:
+          type: string
+          description: Formatted symbol for display.
+        name:
+          type: string
+          description: Full name of the vault.
+          example: "Curve FRAX-crvUSD Factory yVault"
+        displayName:
+          type: string
+          description: Display name used in UIs.
+        formatedName:
+          type: string
+          description: Formatted name for display.
+        icon:
+          type: string
+          format: uri
+          description: URL of the vault token icon.
+        version:
+          type: string
+          description: Vault contract version.
+          example: "0.4.6"
+        category:
+          type: string
+          description: Asset category of the vault.
+          example: "Stablecoin"
+        decimals:
+          type: integer
+          description: Number of decimals for the vault token.
+          example: 18
+        chainID:
+          type: integer
+          description: Chain ID where the vault is deployed.
+          example: 1
+        endorsed:
+          type: boolean
+          description: Whether the vault is officially endorsed by Yearn.
+          example: true
+        boosted:
+          type: boolean
+          description: Whether the vault has boosted rewards active.
+          example: false
+        emergency_shutdown:
+          type: boolean
+          description: Whether the vault is in emergency shutdown mode.
+          example: false
+        token:
+          $ref: '#/components/schemas/VaultToken'
+        tvl:
+          $ref: '#/components/schemas/VaultTVL'
+        apr:
+          $ref: '#/components/schemas/VaultAPR'
+        details:
+          $ref: '#/components/schemas/VaultDetails'
+        strategies:
+          type: array
+          description: List of yield strategies allocated to the vault.
+          items:
+            $ref: '#/components/schemas/VaultStrategy'
+    ChainContract:
+      type: object
+      description: A smart contract deployed on a chain.
+      properties:
+        Address:
+          type: string
+          pattern: '^0x[a-fA-F0-9]{40}$'
+          description: Contract address.
+        Block:
+          type: integer
+          description: Block number at which the contract was deployed.
+        Version:
+          type: integer
+          description: Contract version number.
+        Tag:
+          type: string
+          description: Optional tag label for the contract.
+        Label:
+          type: string
+          description: Optional human-readable label.
+    ChainInfo:
+      type: object
+      description: Configuration and metadata for a supported EVM chain.
+      properties:
+        ID:
+          type: integer
+          description: EVM chain ID.
+          example: 1
+        RpcURI:
+          type: string
+          format: uri
+          description: RPC endpoint URI for the chain.
+        SubgraphURI:
+          type: string
+          format: uri
+          description: The Graph subgraph URI for the chain.
+        EtherscanURI:
+          type: string
+          format: uri
+          description: Etherscan-compatible API URI.
+        MaxBlockRange:
+          type: integer
+          description: Maximum block range for log queries.
+        MaxBatchSize:
+          type: integer
+          description: Maximum batch size for multicall requests.
+        AvgBlocksPerDay:
+          type: integer
+          description: Average number of blocks per day on this chain.
+        CanUseWebsocket:
+          type: boolean
+          description: Whether WebSocket connections are supported.
+        LensContract:
+          $ref: '#/components/schemas/ChainContract'
+        MulticallContract:
+          $ref: '#/components/schemas/ChainContract'
+        YBribeV3Contract:
+          $ref: '#/components/schemas/ChainContract'
+    ChainsResponse:
+      type: object
+      description: Map of chain IDs to chain configuration objects.
+      properties:
+        chains:
+          type: object
+          description: >-
+            An object where each key is a chain ID string and the value
+            is a ChainInfo object.
+          additionalProperties:
+            $ref: '#/components/schemas/ChainInfo'
