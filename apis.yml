@@ -133,6 +133,9 @@ maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 common:
+- type: License
+  name: MIT
+  url: https://github.com/yearn/kong/blob/main/LICENSE
 - type: AgenticAccess
   url: agentic-access/yearn-agentic-access.yml
 - type: DomainSecurity
