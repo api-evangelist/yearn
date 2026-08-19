@@ -3,6 +3,7 @@ description: Yearn Finance is a DeFi yield aggregator that automates yield farmi
   strategies across EVM-compatible networks. It provides REST and GraphQL APIs for
   accessing vault data, APY rates, strategy information, user positions, TVL metrics,
   and protocol analytics across Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum.
+specificationVersion: '0.23'
 accessModel:
   pricing: free
   onboarding: open
