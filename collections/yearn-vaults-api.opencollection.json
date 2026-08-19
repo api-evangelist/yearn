@@ -1,0 +1,275 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Yearn Finance yDaemon REST Chains Vaults API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vaults",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all vaults for a chain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ydaemon.yearn.fi/:chainID/vaults/all",
+            "params": [
+              {
+                "name": "chainID",
+                "value": "",
+                "type": "path",
+                "description": "The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Determines the order of returned vaults."
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "Determines the direction of ordering."
+              },
+              {
+                "name": "strategiesCondition",
+                "value": "",
+                "type": "query",
+                "description": "Filters strategies based on specified condition."
+              },
+              {
+                "name": "hideAlways",
+                "value": "",
+                "type": "query",
+                "description": "If true, hides certain vaults."
+              },
+              {
+                "name": "migrable",
+                "value": "",
+                "type": "query",
+                "description": "Filters vaults based on migration status."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of vaults per page."
+              },
+              {
+                "name": "chainIDs",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of chain IDs to filter vaults."
+              }
+            ]
+          },
+          "docs": "Retrieve all vaults for a specified chain ID. Supports pagination, ordering, and filtering by strategy conditions and details. Returns vaults matching the IsYearn inclusion filter by default."
+        },
+        {
+          "info": {
+            "name": "Get vault by address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ydaemon.yearn.fi/:chainID/vaults/:address",
+            "params": [
+              {
+                "name": "chainID",
+                "value": "",
+                "type": "path",
+                "description": "The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The EVM contract address of the vault."
+              },
+              {
+                "name": "strategiesCondition",
+                "value": "",
+                "type": "query",
+                "description": "Filters strategies based on specified condition."
+              }
+            ]
+          },
+          "docs": "Retrieve data for a single vault by chain ID and contract address. Returns vault metadata, APY, TVL, strategy details, and token information."
+        },
+        {
+          "info": {
+            "name": "Get all V2 vaults for a chain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ydaemon.yearn.fi/:chainID/vaults/v2",
+            "params": [
+              {
+                "name": "chainID",
+                "value": "",
+                "type": "path",
+                "description": "The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Determines the order of returned vaults."
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "Determines the direction of ordering."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of vaults per page."
+              }
+            ]
+          },
+          "docs": "Returns all V2 vaults matching the IsYearn inclusion filter. Filters vaults where the major version number is not 3."
+        },
+        {
+          "info": {
+            "name": "Get all V3 vaults for a chain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ydaemon.yearn.fi/:chainID/vaults/v3",
+            "params": [
+              {
+                "name": "chainID",
+                "value": "",
+                "type": "path",
+                "description": "The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Determines the order of returned vaults."
+              },
+              {
+                "name": "orderDirection",
+                "value": "",
+                "type": "query",
+                "description": "Determines the direction of ordering."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of vaults per page."
+              }
+            ]
+          },
+          "docs": "Returns all V3 vaults matching the IsYearn inclusion filter. Filters vaults where the kind is Multiple or Single, or the major version number is 3."
+        },
+        {
+          "info": {
+            "name": "Get all retired vaults for a chain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ydaemon.yearn.fi/:chainID/vaults/retired",
+            "params": [
+              {
+                "name": "chainID",
+                "value": "",
+                "type": "path",
+                "description": "The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of vaults per page."
+              }
+            ]
+          },
+          "docs": "Returns all retired vaults. Filters vaults where the Metadata.IsRetired flag is true."
+        },
+        {
+          "info": {
+            "name": "Get all detected vaults for a chain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ydaemon.yearn.fi/:chainID/vaults/detected",
+            "params": [
+              {
+                "name": "chainID",
+                "value": "",
+                "type": "path",
+                "description": "The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of vaults per page."
+              }
+            ]
+          },
+          "docs": "Returns all detected vaults regardless of inclusion filter."
+        },
+        {
+          "info": {
+            "name": "Get blacklisted vaults",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ydaemon.yearn.fi/info/vaults/blacklisted"
+          },
+          "docs": "Returns the list of vault contract addresses that are blacklisted and excluded from results across all supported networks."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

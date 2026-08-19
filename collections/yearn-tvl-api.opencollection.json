@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Yearn Finance yDaemon REST Chains TVL API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TVL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get total TVL for a chain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ydaemon.yearn.fi/:chainID/vaults/tvl",
+            "params": [
+              {
+                "name": "chainID",
+                "value": "",
+                "type": "path",
+                "description": "The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+              }
+            ]
+          },
+          "docs": "Returns the Total Value Locked (in USD) aggregated across all vaults on the specified chain."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

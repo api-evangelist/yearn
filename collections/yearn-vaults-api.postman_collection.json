@@ -1,0 +1,1152 @@
+{
+  "item": [
+    {
+      "id": "531337b5-d983-456d-9191-a85f3074301f",
+      "name": "Vaults",
+      "description": {
+        "content": "Endpoints for querying Yearn vault data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2f31e24e-9dc5-4fc7-9378-e2108b2623df",
+          "name": "Get all vaults for a chain",
+          "request": {
+            "name": "Get all vaults for a chain",
+            "description": {
+              "content": "Retrieve all vaults for a specified chain ID. Supports pagination, ordering, and filtering by strategy conditions and details. Returns vaults matching the IsYearn inclusion filter by default.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":chainID",
+                "vaults",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "featuringScore",
+                  "description": "Determines the order of returned vaults."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderDirection",
+                  "value": "asc",
+                  "description": "Determines the direction of ordering."
+                },
+                {
+                  "disabled": false,
+                  "key": "strategiesCondition",
+                  "value": "debtRatio",
+                  "description": "Filters strategies based on specified condition."
+                },
+                {
+                  "disabled": false,
+                  "key": "hideAlways",
+                  "value": "false",
+                  "description": "If true, hides certain vaults."
+                },
+                {
+                  "disabled": false,
+                  "key": "migrable",
+                  "value": "none",
+                  "description": "Filters vaults based on migration status."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "200",
+                  "description": "Number of vaults per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "chainIDs",
+                  "value": "<string>",
+                  "description": "Comma-separated list of chain IDs to filter vaults."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "chainID",
+                  "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4ff9f66-013b-464c-9f78-ac6ecccbcf8c",
+              "name": "An array of vault objects for the specified chain.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainID",
+                    "vaults",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderBy",
+                      "value": "featuringScore"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "strategiesCondition",
+                      "value": "debtRatio"
+                    },
+                    {
+                      "key": "hideAlways",
+                      "value": "false"
+                    },
+                    {
+                      "key": "migrable",
+                      "value": "none"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "200"
+                    },
+                    {
+                      "key": "chainIDs",
+                      "value": "1,10,137"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainID",
+                      "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"address\": \"0x8176b059BD8f63aeB7e20282b12D243b4626E2AE\",\n    \"type\": \"Automated Yearn Vault\",\n    \"kind\": \"Legacy\",\n    \"symbol\": \"yvCurve-FRAX-crvUSD-f\",\n    \"displaySymbol\": \"string\",\n    \"formatedSymbol\": \"string\",\n    \"name\": \"Curve FRAX-crvUSD Factory yVault\",\n    \"displayName\": \"string\",\n    \"formatedName\": \"string\",\n    \"icon\": \"http://fEARgLeZdSgfYlJ.ypynrLU1Do9vo9FU\",\n    \"version\": \"0.4.6\",\n    \"category\": \"Stablecoin\",\n    \"decimals\": 18,\n    \"chainID\": 1,\n    \"endorsed\": true,\n    \"boosted\": false,\n    \"emergency_shutdown\": false,\n    \"token\": {\n      \"address\": \"0x0CD6f267b2086bea681E922E19D40512511BE538\",\n      \"underlyingTokensAddresses\": [\n        \"0xf68F0cFd3c212885Df02Cb5DDAF8B5B741737D21\",\n        \"0xDa0a71459cf7fEDDF2a430e891Eecb2E6cD8Cf4c\"\n      ],\n      \"name\": \"Curve crvUSD-FRAX Pool\",\n      \"symbol\": \"crvUSDFRAX-f\",\n      \"type\": \"Curve LP\",\n      \"display_name\": \"string\",\n      \"display_symbol\": \"string\",\n      \"description\": \"string\",\n      \"icon\": \"http://ZIueSKThyYrN.rxjkmd9k62MOiznAyWO9sVtQk.mL8P\",\n      \"decimals\": 18\n    },\n    \"tvl\": {\n      \"totalAssets\": \"1287176248097615589\",\n      \"tvl\": 1.29,\n      \"price\": 1.005\n    },\n    \"apr\": {\n      \"type\": \"v2:averaged\",\n      \"netAPR\": 7390.444342977802,\n      \"fees\": {\n        \"performance\": 0.1,\n        \"management\": 0\n      },\n      \"points\": {\n        \"weekAgo\": 6507.299704361568,\n        \"monthAgo\": 684.3669983175582,\n        \"inception\": 7229.691705509209\n      },\n      \"pricePerShare\": {\n        \"today\": 5985.234406317275,\n        \"weekAgo\": 5968.03670897889,\n        \"monthAgo\": 3492.8947907850925\n      },\n      \"extra\": {\n        \"stakingRewardsAPR\": 75.4489182608864,\n        \"gammaRewardAPR\": 8059.785886817307\n      },\n      \"forwardAPR\": {\n        \"type\": \"crv\",\n        \"netAPR\": 5630.761502270139,\n        \"composite\": {\n          \"boost\": 9542.23427442646,\n          \"poolAPY\": 9963.309936818328,\n          \"boostedAPR\": 9452.71785279544,\n          \"baseAPR\": 8358.237590690786,\n          \"cvxAPR\": 9056.26923780257,\n          \"rewardsAPR\": 2795.39832847739\n        }\n      }\n    },\n    \"details\": {\n      \"isRetired\": true,\n      \"isHidden\": true,\n      \"isAggregator\": false,\n      \"isBoosted\": false,\n      \"isAutomated\": true,\n      \"isHighlighted\": true,\n      \"isPool\": true,\n      \"poolProvider\": \"Curve\",\n      \"stability\": \"Stable\",\n      \"category\": \"Stablecoin\",\n      \"stableBaseAsset\": \"USD\"\n    },\n    \"strategies\": [\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 5965.169204582312,\n          \"lastReport\": 46,\n          \"debtRatio\": 4205.5044425298875\n        }\n      },\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 8123.671594924794,\n          \"lastReport\": 1865,\n          \"debtRatio\": 3720.5546767336705\n        }\n      }\n    ]\n  },\n  {\n    \"address\": \"0x8176b059BD8f63aeB7e20282b12D243b4626E2AE\",\n    \"type\": \"Automated Yearn Vault\",\n    \"kind\": \"Legacy\",\n    \"symbol\": \"yvCurve-FRAX-crvUSD-f\",\n    \"displaySymbol\": \"string\",\n    \"formatedSymbol\": \"string\",\n    \"name\": \"Curve FRAX-crvUSD Factory yVault\",\n    \"displayName\": \"string\",\n    \"formatedName\": \"string\",\n    \"icon\": \"http://iQDNnKDKesevre.tlhviixloZMQ.C5cRvhyHkIH9dzOUEDJKdwqvo3Nj.25diDYJ.Lsd2Xc1Eekb4l\",\n    \"version\": \"0.4.6\",\n    \"category\": \"Stablecoin\",\n    \"decimals\": 18,\n    \"chainID\": 1,\n    \"endorsed\": true,\n    \"boosted\": false,\n    \"emergency_shutdown\": false,\n    \"token\": {\n      \"address\": \"0x0CD6f267b2086bea681E922E19D40512511BE538\",\n      \"underlyingTokensAddresses\": [\n        \"0x5746bA5F568a887B8CFd2FA9DD75C0653dd381E2\",\n        \"0xa3a4e4C56c1Fca78F59Cb3f5B03FBb0610682557\"\n      ],\n      \"name\": \"Curve crvUSD-FRAX Pool\",\n      \"symbol\": \"crvUSDFRAX-f\",\n      \"type\": \"Curve LP\",\n      \"display_name\": \"string\",\n      \"display_symbol\": \"string\",\n      \"description\": \"string\",\n      \"icon\": \"http://uiKfIOjwuqBJQkANeJTaCYULgYhdiicw.phBCa5q4SHKZAUcKP77ZQ6ULAkCNRttPI6\",\n      \"decimals\": 18\n    },\n    \"tvl\": {\n      \"totalAssets\": \"1287176248097615589\",\n      \"tvl\": 1.29,\n      \"price\": 1.005\n    },\n    \"apr\": {\n      \"type\": \"v2:averaged\",\n      \"netAPR\": 751.2947571410522,\n      \"fees\": {\n        \"performance\": 0.1,\n        \"management\": 0\n      },\n      \"points\": {\n        \"weekAgo\": 9903.814252279006,\n        \"monthAgo\": 7956.754779037293,\n        \"inception\": 2081.528153411446\n      },\n      \"pricePerShare\": {\n        \"today\": 7369.6245324083575,\n        \"weekAgo\": 8488.1934775491,\n        \"monthAgo\": 4935.455427784801\n      },\n      \"extra\": {\n        \"stakingRewardsAPR\": 8326.695566816581,\n        \"gammaRewardAPR\": 686.975031903363\n      },\n      \"forwardAPR\": {\n        \"type\": \"crv\",\n        \"netAPR\": 7890.62590937169,\n        \"composite\": {\n          \"boost\": 1741.6436885849484,\n          \"poolAPY\": 9993.032937539603,\n          \"boostedAPR\": 3524.0069295986764,\n          \"baseAPR\": 1964.7913941572538,\n          \"cvxAPR\": 8747.61769660911,\n          \"rewardsAPR\": 6089.7790491010055\n        }\n      }\n    },\n    \"details\": {\n      \"isRetired\": false,\n      \"isHidden\": true,\n      \"isAggregator\": false,\n      \"isBoosted\": false,\n      \"isAutomated\": false,\n      \"isHighlighted\": false,\n      \"isPool\": false,\n      \"poolProvider\": \"Curve\",\n      \"stability\": \"Stable\",\n      \"category\": \"Stablecoin\",\n      \"stableBaseAsset\": \"USD\"\n    },\n    \"strategies\": [\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 561.708530625673,\n          \"lastReport\": 4442,\n          \"debtRatio\": 481.9250377582462\n        }\n      },\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 3064.6245530970295,\n          \"lastReport\": 3353,\n          \"debtRatio\": 9943.114118544858\n        }\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a19f36f-9448-4837-90b1-8429b7a6c138",
+              "name": "Bad Request - invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainID",
+                    "vaults",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderBy",
+                      "value": "featuringScore"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "strategiesCondition",
+                      "value": "debtRatio"
+                    },
+                    {
+                      "key": "hideAlways",
+                      "value": "false"
+                    },
+                    {
+                      "key": "migrable",
+                      "value": "none"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "200"
+                    },
+                    {
+                      "key": "chainIDs",
+                      "value": "1,10,137"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainID",
+                      "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d4823ab-acdd-462b-ab55-e830354bd9eb",
+              "name": "Not Found - the requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainID",
+                    "vaults",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderBy",
+                      "value": "featuringScore"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "strategiesCondition",
+                      "value": "debtRatio"
+                    },
+                    {
+                      "key": "hideAlways",
+                      "value": "false"
+                    },
+                    {
+                      "key": "migrable",
+                      "value": "none"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "200"
+                    },
+                    {
+                      "key": "chainIDs",
+                      "value": "1,10,137"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainID",
+                      "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7cd6020-bcbc-412c-91ed-cc086e4d5e00",
+          "name": "Get vault by address",
+          "request": {
+            "name": "Get vault by address",
+            "description": {
+              "content": "Retrieve data for a single vault by chain ID and contract address. Returns vault metadata, APY, TVL, strategy details, and token information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":chainID",
+                "vaults",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "strategiesCondition",
+                  "value": "debtRatio",
+                  "description": "Filters strategies based on specified condition."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "chainID",
+                  "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) The EVM contract address of the vault."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "08f6c9b4-b33e-41a7-b3df-60e6f8fcc322",
+              "name": "A vault object with full metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainID",
+                    "vaults",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "strategiesCondition",
+                      "value": "debtRatio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainID",
+                      "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) The EVM contract address of the vault."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"address\": \"0x8176b059BD8f63aeB7e20282b12D243b4626E2AE\",\n  \"type\": \"Automated Yearn Vault\",\n  \"kind\": \"Legacy\",\n  \"symbol\": \"yvCurve-FRAX-crvUSD-f\",\n  \"displaySymbol\": \"string\",\n  \"formatedSymbol\": \"string\",\n  \"name\": \"Curve FRAX-crvUSD Factory yVault\",\n  \"displayName\": \"string\",\n  \"formatedName\": \"string\",\n  \"icon\": \"https://vEvMYdbvxBGZcfCTjWrxTbFazhFtfB.ymedEmLEfVrozQVXVILRg4k-qQgHRKsmu-2wAQQ7\",\n  \"version\": \"0.4.6\",\n  \"category\": \"Stablecoin\",\n  \"decimals\": 18,\n  \"chainID\": 1,\n  \"endorsed\": true,\n  \"boosted\": false,\n  \"emergency_shutdown\": false,\n  \"token\": {\n    \"address\": \"0x0CD6f267b2086bea681E922E19D40512511BE538\",\n    \"underlyingTokensAddresses\": [\n      \"0xb15e9EFb323E004c9D756D6FFA6fffB0fE1DaDC1\",\n      \"0x2ECAb679A7AD1D23fbAD5dFD7df8A4414a44FB5F\"\n    ],\n    \"name\": \"Curve crvUSD-FRAX Pool\",\n    \"symbol\": \"crvUSDFRAX-f\",\n    \"type\": \"Curve LP\",\n    \"display_name\": \"string\",\n    \"display_symbol\": \"string\",\n    \"description\": \"string\",\n    \"icon\": \"https://hxBXYSGKBSxqLgUFYMyNbYnPXVi.mkFEAJH.\",\n    \"decimals\": 18\n  },\n  \"tvl\": {\n    \"totalAssets\": \"1287176248097615589\",\n    \"tvl\": 1.29,\n    \"price\": 1.005\n  },\n  \"apr\": {\n    \"type\": \"v2:averaged\",\n    \"netAPR\": 8238.014372665542,\n    \"fees\": {\n      \"performance\": 0.1,\n      \"management\": 0\n    },\n    \"points\": {\n      \"weekAgo\": 1272.4987535603327,\n      \"monthAgo\": 4237.849406083883,\n      \"inception\": 7974.274043572837\n    },\n    \"pricePerShare\": {\n      \"today\": 8100.27634707261,\n      \"weekAgo\": 3449.896649772234,\n      \"monthAgo\": 4735.245441995396\n    },\n    \"extra\": {\n      \"stakingRewardsAPR\": 4007.44919215383,\n      \"gammaRewardAPR\": 1256.9057247179471\n    },\n    \"forwardAPR\": {\n      \"type\": \"crv\",\n      \"netAPR\": 7548.760569827343,\n      \"composite\": {\n        \"boost\": 5096.647628920798,\n        \"poolAPY\": 7901.823461852965,\n        \"boostedAPR\": 3749.384095488736,\n        \"baseAPR\": 1647.1047915445058,\n        \"cvxAPR\": 8518.864831423663,\n        \"rewardsAPR\": 8445.220325236829\n      }\n    }\n  },\n  \"details\": {\n    \"isRetired\": false,\n    \"isHidden\": false,\n    \"isAggregator\": false,\n    \"isBoosted\": false,\n    \"isAutomated\": true,\n    \"isHighlighted\": false,\n    \"isPool\": false,\n    \"poolProvider\": \"Curve\",\n    \"stability\": \"Stable\",\n    \"category\": \"Stablecoin\",\n    \"stableBaseAsset\": \"USD\"\n  },\n  \"strategies\": [\n    {\n      \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n      \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n      \"status\": \"active\",\n      \"details\": {\n        \"totalDebt\": \"string\",\n        \"totalLoss\": \"string\",\n        \"totalGain\": \"string\",\n        \"performanceFee\": 7696.577833593772,\n        \"lastReport\": 9242,\n        \"debtRatio\": 1090.9238917404673\n      }\n    },\n    {\n      \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n      \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n      \"status\": \"active\",\n      \"details\": {\n        \"totalDebt\": \"string\",\n        \"totalLoss\": \"string\",\n        \"totalGain\": \"string\",\n        \"performanceFee\": 9088.060910932196,\n        \"lastReport\": 2644,\n        \"debtRatio\": 7571.664793616768\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f017d1f7-2d85-41b9-931b-6bc00953e6ad",
+              "name": "Bad Request - invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainID",
+                    "vaults",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "strategiesCondition",
+                      "value": "debtRatio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainID",
+                      "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) The EVM contract address of the vault."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10d6508c-d67c-4da9-be35-98ba75c732b8",
+              "name": "Not Found - the requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainID",
+                    "vaults",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "strategiesCondition",
+                      "value": "debtRatio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainID",
+                      "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) The EVM contract address of the vault."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5285114-2e47-4843-90ea-831e7f1eb401",
+          "name": "Get all V2 vaults for a chain",
+          "request": {
+            "name": "Get all V2 vaults for a chain",
+            "description": {
+              "content": "Returns all V2 vaults matching the IsYearn inclusion filter. Filters vaults where the major version number is not 3.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":chainID",
+                "vaults",
+                "v2"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "featuringScore",
+                  "description": "Determines the order of returned vaults."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderDirection",
+                  "value": "asc",
+                  "description": "Determines the direction of ordering."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "200",
+                  "description": "Number of vaults per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "chainID",
+                  "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8d87f850-505d-42cd-9a58-ffef3ebdac86",
+              "name": "An array of V2 vault objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainID",
+                    "vaults",
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderBy",
+                      "value": "featuringScore"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "200"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainID",
+                      "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"address\": \"0x8176b059BD8f63aeB7e20282b12D243b4626E2AE\",\n    \"type\": \"Automated Yearn Vault\",\n    \"kind\": \"Legacy\",\n    \"symbol\": \"yvCurve-FRAX-crvUSD-f\",\n    \"displaySymbol\": \"string\",\n    \"formatedSymbol\": \"string\",\n    \"name\": \"Curve FRAX-crvUSD Factory yVault\",\n    \"displayName\": \"string\",\n    \"formatedName\": \"string\",\n    \"icon\": \"http://fEARgLeZdSgfYlJ.ypynrLU1Do9vo9FU\",\n    \"version\": \"0.4.6\",\n    \"category\": \"Stablecoin\",\n    \"decimals\": 18,\n    \"chainID\": 1,\n    \"endorsed\": true,\n    \"boosted\": false,\n    \"emergency_shutdown\": false,\n    \"token\": {\n      \"address\": \"0x0CD6f267b2086bea681E922E19D40512511BE538\",\n      \"underlyingTokensAddresses\": [\n        \"0xf68F0cFd3c212885Df02Cb5DDAF8B5B741737D21\",\n        \"0xDa0a71459cf7fEDDF2a430e891Eecb2E6cD8Cf4c\"\n      ],\n      \"name\": \"Curve crvUSD-FRAX Pool\",\n      \"symbol\": \"crvUSDFRAX-f\",\n      \"type\": \"Curve LP\",\n      \"display_name\": \"string\",\n      \"display_symbol\": \"string\",\n      \"description\": \"string\",\n      \"icon\": \"http://ZIueSKThyYrN.rxjkmd9k62MOiznAyWO9sVtQk.mL8P\",\n      \"decimals\": 18\n    },\n    \"tvl\": {\n      \"totalAssets\": \"1287176248097615589\",\n      \"tvl\": 1.29,\n      \"price\": 1.005\n    },\n    \"apr\": {\n      \"type\": \"v2:averaged\",\n      \"netAPR\": 7390.444342977802,\n      \"fees\": {\n        \"performance\": 0.1,\n        \"management\": 0\n      },\n      \"points\": {\n        \"weekAgo\": 6507.299704361568,\n        \"monthAgo\": 684.3669983175582,\n        \"inception\": 7229.691705509209\n      },\n      \"pricePerShare\": {\n        \"today\": 5985.234406317275,\n        \"weekAgo\": 5968.03670897889,\n        \"monthAgo\": 3492.8947907850925\n      },\n      \"extra\": {\n        \"stakingRewardsAPR\": 75.4489182608864,\n        \"gammaRewardAPR\": 8059.785886817307\n      },\n      \"forwardAPR\": {\n        \"type\": \"crv\",\n        \"netAPR\": 5630.761502270139,\n        \"composite\": {\n          \"boost\": 9542.23427442646,\n          \"poolAPY\": 9963.309936818328,\n          \"boostedAPR\": 9452.71785279544,\n          \"baseAPR\": 8358.237590690786,\n          \"cvxAPR\": 9056.26923780257,\n          \"rewardsAPR\": 2795.39832847739\n        }\n      }\n    },\n    \"details\": {\n      \"isRetired\": true,\n      \"isHidden\": true,\n      \"isAggregator\": false,\n      \"isBoosted\": false,\n      \"isAutomated\": true,\n      \"isHighlighted\": true,\n      \"isPool\": true,\n      \"poolProvider\": \"Curve\",\n      \"stability\": \"Stable\",\n      \"category\": \"Stablecoin\",\n      \"stableBaseAsset\": \"USD\"\n    },\n    \"strategies\": [\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 5965.169204582312,\n          \"lastReport\": 46,\n          \"debtRatio\": 4205.5044425298875\n        }\n      },\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 8123.671594924794,\n          \"lastReport\": 1865,\n          \"debtRatio\": 3720.5546767336705\n        }\n      }\n    ]\n  },\n  {\n    \"address\": \"0x8176b059BD8f63aeB7e20282b12D243b4626E2AE\",\n    \"type\": \"Automated Yearn Vault\",\n    \"kind\": \"Legacy\",\n    \"symbol\": \"yvCurve-FRAX-crvUSD-f\",\n    \"displaySymbol\": \"string\",\n    \"formatedSymbol\": \"string\",\n    \"name\": \"Curve FRAX-crvUSD Factory yVault\",\n    \"displayName\": \"string\",\n    \"formatedName\": \"string\",\n    \"icon\": \"http://iQDNnKDKesevre.tlhviixloZMQ.C5cRvhyHkIH9dzOUEDJKdwqvo3Nj.25diDYJ.Lsd2Xc1Eekb4l\",\n    \"version\": \"0.4.6\",\n    \"category\": \"Stablecoin\",\n    \"decimals\": 18,\n    \"chainID\": 1,\n    \"endorsed\": true,\n    \"boosted\": false,\n    \"emergency_shutdown\": false,\n    \"token\": {\n      \"address\": \"0x0CD6f267b2086bea681E922E19D40512511BE538\",\n      \"underlyingTokensAddresses\": [\n        \"0x5746bA5F568a887B8CFd2FA9DD75C0653dd381E2\",\n        \"0xa3a4e4C56c1Fca78F59Cb3f5B03FBb0610682557\"\n      ],\n      \"name\": \"Curve crvUSD-FRAX Pool\",\n      \"symbol\": \"crvUSDFRAX-f\",\n      \"type\": \"Curve LP\",\n      \"display_name\": \"string\",\n      \"display_symbol\": \"string\",\n      \"description\": \"string\",\n      \"icon\": \"http://uiKfIOjwuqBJQkANeJTaCYULgYhdiicw.phBCa5q4SHKZAUcKP77ZQ6ULAkCNRttPI6\",\n      \"decimals\": 18\n    },\n    \"tvl\": {\n      \"totalAssets\": \"1287176248097615589\",\n      \"tvl\": 1.29,\n      \"price\": 1.005\n    },\n    \"apr\": {\n      \"type\": \"v2:averaged\",\n      \"netAPR\": 751.2947571410522,\n      \"fees\": {\n        \"performance\": 0.1,\n        \"management\": 0\n      },\n      \"points\": {\n        \"weekAgo\": 9903.814252279006,\n        \"monthAgo\": 7956.754779037293,\n        \"inception\": 2081.528153411446\n      },\n      \"pricePerShare\": {\n        \"today\": 7369.6245324083575,\n        \"weekAgo\": 8488.1934775491,\n        \"monthAgo\": 4935.455427784801\n      },\n      \"extra\": {\n        \"stakingRewardsAPR\": 8326.695566816581,\n        \"gammaRewardAPR\": 686.975031903363\n      },\n      \"forwardAPR\": {\n        \"type\": \"crv\",\n        \"netAPR\": 7890.62590937169,\n        \"composite\": {\n          \"boost\": 1741.6436885849484,\n          \"poolAPY\": 9993.032937539603,\n          \"boostedAPR\": 3524.0069295986764,\n          \"baseAPR\": 1964.7913941572538,\n          \"cvxAPR\": 8747.61769660911,\n          \"rewardsAPR\": 6089.7790491010055\n        }\n      }\n    },\n    \"details\": {\n      \"isRetired\": false,\n      \"isHidden\": true,\n      \"isAggregator\": false,\n      \"isBoosted\": false,\n      \"isAutomated\": false,\n      \"isHighlighted\": false,\n      \"isPool\": false,\n      \"poolProvider\": \"Curve\",\n      \"stability\": \"Stable\",\n      \"category\": \"Stablecoin\",\n      \"stableBaseAsset\": \"USD\"\n    },\n    \"strategies\": [\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 561.708530625673,\n          \"lastReport\": 4442,\n          \"debtRatio\": 481.9250377582462\n        }\n      },\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 3064.6245530970295,\n          \"lastReport\": 3353,\n          \"debtRatio\": 9943.114118544858\n        }\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a808fc1-9d98-45ee-af57-ef522069bb8d",
+          "name": "Get all V3 vaults for a chain",
+          "request": {
+            "name": "Get all V3 vaults for a chain",
+            "description": {
+              "content": "Returns all V3 vaults matching the IsYearn inclusion filter. Filters vaults where the kind is Multiple or Single, or the major version number is 3.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":chainID",
+                "vaults",
+                "v3"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "featuringScore",
+                  "description": "Determines the order of returned vaults."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderDirection",
+                  "value": "asc",
+                  "description": "Determines the direction of ordering."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "200",
+                  "description": "Number of vaults per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "chainID",
+                  "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "534df7ab-b261-4920-b6e1-6bd3a2d8ce6d",
+              "name": "An array of V3 vault objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainID",
+                    "vaults",
+                    "v3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderBy",
+                      "value": "featuringScore"
+                    },
+                    {
+                      "key": "orderDirection",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "200"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainID",
+                      "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"address\": \"0x8176b059BD8f63aeB7e20282b12D243b4626E2AE\",\n    \"type\": \"Automated Yearn Vault\",\n    \"kind\": \"Legacy\",\n    \"symbol\": \"yvCurve-FRAX-crvUSD-f\",\n    \"displaySymbol\": \"string\",\n    \"formatedSymbol\": \"string\",\n    \"name\": \"Curve FRAX-crvUSD Factory yVault\",\n    \"displayName\": \"string\",\n    \"formatedName\": \"string\",\n    \"icon\": \"http://fEARgLeZdSgfYlJ.ypynrLU1Do9vo9FU\",\n    \"version\": \"0.4.6\",\n    \"category\": \"Stablecoin\",\n    \"decimals\": 18,\n    \"chainID\": 1,\n    \"endorsed\": true,\n    \"boosted\": false,\n    \"emergency_shutdown\": false,\n    \"token\": {\n      \"address\": \"0x0CD6f267b2086bea681E922E19D40512511BE538\",\n      \"underlyingTokensAddresses\": [\n        \"0xf68F0cFd3c212885Df02Cb5DDAF8B5B741737D21\",\n        \"0xDa0a71459cf7fEDDF2a430e891Eecb2E6cD8Cf4c\"\n      ],\n      \"name\": \"Curve crvUSD-FRAX Pool\",\n      \"symbol\": \"crvUSDFRAX-f\",\n      \"type\": \"Curve LP\",\n      \"display_name\": \"string\",\n      \"display_symbol\": \"string\",\n      \"description\": \"string\",\n      \"icon\": \"http://ZIueSKThyYrN.rxjkmd9k62MOiznAyWO9sVtQk.mL8P\",\n      \"decimals\": 18\n    },\n    \"tvl\": {\n      \"totalAssets\": \"1287176248097615589\",\n      \"tvl\": 1.29,\n      \"price\": 1.005\n    },\n    \"apr\": {\n      \"type\": \"v2:averaged\",\n      \"netAPR\": 7390.444342977802,\n      \"fees\": {\n        \"performance\": 0.1,\n        \"management\": 0\n      },\n      \"points\": {\n        \"weekAgo\": 6507.299704361568,\n        \"monthAgo\": 684.3669983175582,\n        \"inception\": 7229.691705509209\n      },\n      \"pricePerShare\": {\n        \"today\": 5985.234406317275,\n        \"weekAgo\": 5968.03670897889,\n        \"monthAgo\": 3492.8947907850925\n      },\n      \"extra\": {\n        \"stakingRewardsAPR\": 75.4489182608864,\n        \"gammaRewardAPR\": 8059.785886817307\n      },\n      \"forwardAPR\": {\n        \"type\": \"crv\",\n        \"netAPR\": 5630.761502270139,\n        \"composite\": {\n          \"boost\": 9542.23427442646,\n          \"poolAPY\": 9963.309936818328,\n          \"boostedAPR\": 9452.71785279544,\n          \"baseAPR\": 8358.237590690786,\n          \"cvxAPR\": 9056.26923780257,\n          \"rewardsAPR\": 2795.39832847739\n        }\n      }\n    },\n    \"details\": {\n      \"isRetired\": true,\n      \"isHidden\": true,\n      \"isAggregator\": false,\n      \"isBoosted\": false,\n      \"isAutomated\": true,\n      \"isHighlighted\": true,\n      \"isPool\": true,\n      \"poolProvider\": \"Curve\",\n      \"stability\": \"Stable\",\n      \"category\": \"Stablecoin\",\n      \"stableBaseAsset\": \"USD\"\n    },\n    \"strategies\": [\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 5965.169204582312,\n          \"lastReport\": 46,\n          \"debtRatio\": 4205.5044425298875\n        }\n      },\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 8123.671594924794,\n          \"lastReport\": 1865,\n          \"debtRatio\": 3720.5546767336705\n        }\n      }\n    ]\n  },\n  {\n    \"address\": \"0x8176b059BD8f63aeB7e20282b12D243b4626E2AE\",\n    \"type\": \"Automated Yearn Vault\",\n    \"kind\": \"Legacy\",\n    \"symbol\": \"yvCurve-FRAX-crvUSD-f\",\n    \"displaySymbol\": \"string\",\n    \"formatedSymbol\": \"string\",\n    \"name\": \"Curve FRAX-crvUSD Factory yVault\",\n    \"displayName\": \"string\",\n    \"formatedName\": \"string\",\n    \"icon\": \"http://iQDNnKDKesevre.tlhviixloZMQ.C5cRvhyHkIH9dzOUEDJKdwqvo3Nj.25diDYJ.Lsd2Xc1Eekb4l\",\n    \"version\": \"0.4.6\",\n    \"category\": \"Stablecoin\",\n    \"decimals\": 18,\n    \"chainID\": 1,\n    \"endorsed\": true,\n    \"boosted\": false,\n    \"emergency_shutdown\": false,\n    \"token\": {\n      \"address\": \"0x0CD6f267b2086bea681E922E19D40512511BE538\",\n      \"underlyingTokensAddresses\": [\n        \"0x5746bA5F568a887B8CFd2FA9DD75C0653dd381E2\",\n        \"0xa3a4e4C56c1Fca78F59Cb3f5B03FBb0610682557\"\n      ],\n      \"name\": \"Curve crvUSD-FRAX Pool\",\n      \"symbol\": \"crvUSDFRAX-f\",\n      \"type\": \"Curve LP\",\n      \"display_name\": \"string\",\n      \"display_symbol\": \"string\",\n      \"description\": \"string\",\n      \"icon\": \"http://uiKfIOjwuqBJQkANeJTaCYULgYhdiicw.phBCa5q4SHKZAUcKP77ZQ6ULAkCNRttPI6\",\n      \"decimals\": 18\n    },\n    \"tvl\": {\n      \"totalAssets\": \"1287176248097615589\",\n      \"tvl\": 1.29,\n      \"price\": 1.005\n    },\n    \"apr\": {\n      \"type\": \"v2:averaged\",\n      \"netAPR\": 751.2947571410522,\n      \"fees\": {\n        \"performance\": 0.1,\n        \"management\": 0\n      },\n      \"points\": {\n        \"weekAgo\": 9903.814252279006,\n        \"monthAgo\": 7956.754779037293,\n        \"inception\": 2081.528153411446\n      },\n      \"pricePerShare\": {\n        \"today\": 7369.6245324083575,\n        \"weekAgo\": 8488.1934775491,\n        \"monthAgo\": 4935.455427784801\n      },\n      \"extra\": {\n        \"stakingRewardsAPR\": 8326.695566816581,\n        \"gammaRewardAPR\": 686.975031903363\n      },\n      \"forwardAPR\": {\n        \"type\": \"crv\",\n        \"netAPR\": 7890.62590937169,\n        \"composite\": {\n          \"boost\": 1741.6436885849484,\n          \"poolAPY\": 9993.032937539603,\n          \"boostedAPR\": 3524.0069295986764,\n          \"baseAPR\": 1964.7913941572538,\n          \"cvxAPR\": 8747.61769660911,\n          \"rewardsAPR\": 6089.7790491010055\n        }\n      }\n    },\n    \"details\": {\n      \"isRetired\": false,\n      \"isHidden\": true,\n      \"isAggregator\": false,\n      \"isBoosted\": false,\n      \"isAutomated\": false,\n      \"isHighlighted\": false,\n      \"isPool\": false,\n      \"poolProvider\": \"Curve\",\n      \"stability\": \"Stable\",\n      \"category\": \"Stablecoin\",\n      \"stableBaseAsset\": \"USD\"\n    },\n    \"strategies\": [\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 561.708530625673,\n          \"lastReport\": 4442,\n          \"debtRatio\": 481.9250377582462\n        }\n      },\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 3064.6245530970295,\n          \"lastReport\": 3353,\n          \"debtRatio\": 9943.114118544858\n        }\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d2a9dab-d1a5-4230-a4c6-b2a779a39fc9",
+          "name": "Get all retired vaults for a chain",
+          "request": {
+            "name": "Get all retired vaults for a chain",
+            "description": {
+              "content": "Returns all retired vaults. Filters vaults where the Metadata.IsRetired flag is true.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":chainID",
+                "vaults",
+                "retired"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "200",
+                  "description": "Number of vaults per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "chainID",
+                  "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ecb74ba0-6730-43cb-abf0-4241d19977a7",
+              "name": "An array of retired vault objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainID",
+                    "vaults",
+                    "retired"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "200"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainID",
+                      "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"address\": \"0x8176b059BD8f63aeB7e20282b12D243b4626E2AE\",\n    \"type\": \"Automated Yearn Vault\",\n    \"kind\": \"Legacy\",\n    \"symbol\": \"yvCurve-FRAX-crvUSD-f\",\n    \"displaySymbol\": \"string\",\n    \"formatedSymbol\": \"string\",\n    \"name\": \"Curve FRAX-crvUSD Factory yVault\",\n    \"displayName\": \"string\",\n    \"formatedName\": \"string\",\n    \"icon\": \"http://fEARgLeZdSgfYlJ.ypynrLU1Do9vo9FU\",\n    \"version\": \"0.4.6\",\n    \"category\": \"Stablecoin\",\n    \"decimals\": 18,\n    \"chainID\": 1,\n    \"endorsed\": true,\n    \"boosted\": false,\n    \"emergency_shutdown\": false,\n    \"token\": {\n      \"address\": \"0x0CD6f267b2086bea681E922E19D40512511BE538\",\n      \"underlyingTokensAddresses\": [\n        \"0xf68F0cFd3c212885Df02Cb5DDAF8B5B741737D21\",\n        \"0xDa0a71459cf7fEDDF2a430e891Eecb2E6cD8Cf4c\"\n      ],\n      \"name\": \"Curve crvUSD-FRAX Pool\",\n      \"symbol\": \"crvUSDFRAX-f\",\n      \"type\": \"Curve LP\",\n      \"display_name\": \"string\",\n      \"display_symbol\": \"string\",\n      \"description\": \"string\",\n      \"icon\": \"http://ZIueSKThyYrN.rxjkmd9k62MOiznAyWO9sVtQk.mL8P\",\n      \"decimals\": 18\n    },\n    \"tvl\": {\n      \"totalAssets\": \"1287176248097615589\",\n      \"tvl\": 1.29,\n      \"price\": 1.005\n    },\n    \"apr\": {\n      \"type\": \"v2:averaged\",\n      \"netAPR\": 7390.444342977802,\n      \"fees\": {\n        \"performance\": 0.1,\n        \"management\": 0\n      },\n      \"points\": {\n        \"weekAgo\": 6507.299704361568,\n        \"monthAgo\": 684.3669983175582,\n        \"inception\": 7229.691705509209\n      },\n      \"pricePerShare\": {\n        \"today\": 5985.234406317275,\n        \"weekAgo\": 5968.03670897889,\n        \"monthAgo\": 3492.8947907850925\n      },\n      \"extra\": {\n        \"stakingRewardsAPR\": 75.4489182608864,\n        \"gammaRewardAPR\": 8059.785886817307\n      },\n      \"forwardAPR\": {\n        \"type\": \"crv\",\n        \"netAPR\": 5630.761502270139,\n        \"composite\": {\n          \"boost\": 9542.23427442646,\n          \"poolAPY\": 9963.309936818328,\n          \"boostedAPR\": 9452.71785279544,\n          \"baseAPR\": 8358.237590690786,\n          \"cvxAPR\": 9056.26923780257,\n          \"rewardsAPR\": 2795.39832847739\n        }\n      }\n    },\n    \"details\": {\n      \"isRetired\": true,\n      \"isHidden\": true,\n      \"isAggregator\": false,\n      \"isBoosted\": false,\n      \"isAutomated\": true,\n      \"isHighlighted\": true,\n      \"isPool\": true,\n      \"poolProvider\": \"Curve\",\n      \"stability\": \"Stable\",\n      \"category\": \"Stablecoin\",\n      \"stableBaseAsset\": \"USD\"\n    },\n    \"strategies\": [\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 5965.169204582312,\n          \"lastReport\": 46,\n          \"debtRatio\": 4205.5044425298875\n        }\n      },\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 8123.671594924794,\n          \"lastReport\": 1865,\n          \"debtRatio\": 3720.5546767336705\n        }\n      }\n    ]\n  },\n  {\n    \"address\": \"0x8176b059BD8f63aeB7e20282b12D243b4626E2AE\",\n    \"type\": \"Automated Yearn Vault\",\n    \"kind\": \"Legacy\",\n    \"symbol\": \"yvCurve-FRAX-crvUSD-f\",\n    \"displaySymbol\": \"string\",\n    \"formatedSymbol\": \"string\",\n    \"name\": \"Curve FRAX-crvUSD Factory yVault\",\n    \"displayName\": \"string\",\n    \"formatedName\": \"string\",\n    \"icon\": \"http://iQDNnKDKesevre.tlhviixloZMQ.C5cRvhyHkIH9dzOUEDJKdwqvo3Nj.25diDYJ.Lsd2Xc1Eekb4l\",\n    \"version\": \"0.4.6\",\n    \"category\": \"Stablecoin\",\n    \"decimals\": 18,\n    \"chainID\": 1,\n    \"endorsed\": true,\n    \"boosted\": false,\n    \"emergency_shutdown\": false,\n    \"token\": {\n      \"address\": \"0x0CD6f267b2086bea681E922E19D40512511BE538\",\n      \"underlyingTokensAddresses\": [\n        \"0x5746bA5F568a887B8CFd2FA9DD75C0653dd381E2\",\n        \"0xa3a4e4C56c1Fca78F59Cb3f5B03FBb0610682557\"\n      ],\n      \"name\": \"Curve crvUSD-FRAX Pool\",\n      \"symbol\": \"crvUSDFRAX-f\",\n      \"type\": \"Curve LP\",\n      \"display_name\": \"string\",\n      \"display_symbol\": \"string\",\n      \"description\": \"string\",\n      \"icon\": \"http://uiKfIOjwuqBJQkANeJTaCYULgYhdiicw.phBCa5q4SHKZAUcKP77ZQ6ULAkCNRttPI6\",\n      \"decimals\": 18\n    },\n    \"tvl\": {\n      \"totalAssets\": \"1287176248097615589\",\n      \"tvl\": 1.29,\n      \"price\": 1.005\n    },\n    \"apr\": {\n      \"type\": \"v2:averaged\",\n      \"netAPR\": 751.2947571410522,\n      \"fees\": {\n        \"performance\": 0.1,\n        \"management\": 0\n      },\n      \"points\": {\n        \"weekAgo\": 9903.814252279006,\n        \"monthAgo\": 7956.754779037293,\n        \"inception\": 2081.528153411446\n      },\n      \"pricePerShare\": {\n        \"today\": 7369.6245324083575,\n        \"weekAgo\": 8488.1934775491,\n        \"monthAgo\": 4935.455427784801\n      },\n      \"extra\": {\n        \"stakingRewardsAPR\": 8326.695566816581,\n        \"gammaRewardAPR\": 686.975031903363\n      },\n      \"forwardAPR\": {\n        \"type\": \"crv\",\n        \"netAPR\": 7890.62590937169,\n        \"composite\": {\n          \"boost\": 1741.6436885849484,\n          \"poolAPY\": 9993.032937539603,\n          \"boostedAPR\": 3524.0069295986764,\n          \"baseAPR\": 1964.7913941572538,\n          \"cvxAPR\": 8747.61769660911,\n          \"rewardsAPR\": 6089.7790491010055\n        }\n      }\n    },\n    \"details\": {\n      \"isRetired\": false,\n      \"isHidden\": true,\n      \"isAggregator\": false,\n      \"isBoosted\": false,\n      \"isAutomated\": false,\n      \"isHighlighted\": false,\n      \"isPool\": false,\n      \"poolProvider\": \"Curve\",\n      \"stability\": \"Stable\",\n      \"category\": \"Stablecoin\",\n      \"stableBaseAsset\": \"USD\"\n    },\n    \"strategies\": [\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 561.708530625673,\n          \"lastReport\": 4442,\n          \"debtRatio\": 481.9250377582462\n        }\n      },\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 3064.6245530970295,\n          \"lastReport\": 3353,\n          \"debtRatio\": 9943.114118544858\n        }\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c16e3b1-ed1a-475d-adcb-bb2ee88d0f98",
+          "name": "Get all detected vaults for a chain",
+          "request": {
+            "name": "Get all detected vaults for a chain",
+            "description": {
+              "content": "Returns all detected vaults regardless of inclusion filter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":chainID",
+                "vaults",
+                "detected"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "200",
+                  "description": "Number of vaults per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "chainID",
+                  "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d275c9cc-8f4e-4ee5-85b4-b18e1056dd60",
+              "name": "An array of detected vault objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainID",
+                    "vaults",
+                    "detected"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "200"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainID",
+                      "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"address\": \"0x8176b059BD8f63aeB7e20282b12D243b4626E2AE\",\n    \"type\": \"Automated Yearn Vault\",\n    \"kind\": \"Legacy\",\n    \"symbol\": \"yvCurve-FRAX-crvUSD-f\",\n    \"displaySymbol\": \"string\",\n    \"formatedSymbol\": \"string\",\n    \"name\": \"Curve FRAX-crvUSD Factory yVault\",\n    \"displayName\": \"string\",\n    \"formatedName\": \"string\",\n    \"icon\": \"http://fEARgLeZdSgfYlJ.ypynrLU1Do9vo9FU\",\n    \"version\": \"0.4.6\",\n    \"category\": \"Stablecoin\",\n    \"decimals\": 18,\n    \"chainID\": 1,\n    \"endorsed\": true,\n    \"boosted\": false,\n    \"emergency_shutdown\": false,\n    \"token\": {\n      \"address\": \"0x0CD6f267b2086bea681E922E19D40512511BE538\",\n      \"underlyingTokensAddresses\": [\n        \"0xf68F0cFd3c212885Df02Cb5DDAF8B5B741737D21\",\n        \"0xDa0a71459cf7fEDDF2a430e891Eecb2E6cD8Cf4c\"\n      ],\n      \"name\": \"Curve crvUSD-FRAX Pool\",\n      \"symbol\": \"crvUSDFRAX-f\",\n      \"type\": \"Curve LP\",\n      \"display_name\": \"string\",\n      \"display_symbol\": \"string\",\n      \"description\": \"string\",\n      \"icon\": \"http://ZIueSKThyYrN.rxjkmd9k62MOiznAyWO9sVtQk.mL8P\",\n      \"decimals\": 18\n    },\n    \"tvl\": {\n      \"totalAssets\": \"1287176248097615589\",\n      \"tvl\": 1.29,\n      \"price\": 1.005\n    },\n    \"apr\": {\n      \"type\": \"v2:averaged\",\n      \"netAPR\": 7390.444342977802,\n      \"fees\": {\n        \"performance\": 0.1,\n        \"management\": 0\n      },\n      \"points\": {\n        \"weekAgo\": 6507.299704361568,\n        \"monthAgo\": 684.3669983175582,\n        \"inception\": 7229.691705509209\n      },\n      \"pricePerShare\": {\n        \"today\": 5985.234406317275,\n        \"weekAgo\": 5968.03670897889,\n        \"monthAgo\": 3492.8947907850925\n      },\n      \"extra\": {\n        \"stakingRewardsAPR\": 75.4489182608864,\n        \"gammaRewardAPR\": 8059.785886817307\n      },\n      \"forwardAPR\": {\n        \"type\": \"crv\",\n        \"netAPR\": 5630.761502270139,\n        \"composite\": {\n          \"boost\": 9542.23427442646,\n          \"poolAPY\": 9963.309936818328,\n          \"boostedAPR\": 9452.71785279544,\n          \"baseAPR\": 8358.237590690786,\n          \"cvxAPR\": 9056.26923780257,\n          \"rewardsAPR\": 2795.39832847739\n        }\n      }\n    },\n    \"details\": {\n      \"isRetired\": true,\n      \"isHidden\": true,\n      \"isAggregator\": false,\n      \"isBoosted\": false,\n      \"isAutomated\": true,\n      \"isHighlighted\": true,\n      \"isPool\": true,\n      \"poolProvider\": \"Curve\",\n      \"stability\": \"Stable\",\n      \"category\": \"Stablecoin\",\n      \"stableBaseAsset\": \"USD\"\n    },\n    \"strategies\": [\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 5965.169204582312,\n          \"lastReport\": 46,\n          \"debtRatio\": 4205.5044425298875\n        }\n      },\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 8123.671594924794,\n          \"lastReport\": 1865,\n          \"debtRatio\": 3720.5546767336705\n        }\n      }\n    ]\n  },\n  {\n    \"address\": \"0x8176b059BD8f63aeB7e20282b12D243b4626E2AE\",\n    \"type\": \"Automated Yearn Vault\",\n    \"kind\": \"Legacy\",\n    \"symbol\": \"yvCurve-FRAX-crvUSD-f\",\n    \"displaySymbol\": \"string\",\n    \"formatedSymbol\": \"string\",\n    \"name\": \"Curve FRAX-crvUSD Factory yVault\",\n    \"displayName\": \"string\",\n    \"formatedName\": \"string\",\n    \"icon\": \"http://iQDNnKDKesevre.tlhviixloZMQ.C5cRvhyHkIH9dzOUEDJKdwqvo3Nj.25diDYJ.Lsd2Xc1Eekb4l\",\n    \"version\": \"0.4.6\",\n    \"category\": \"Stablecoin\",\n    \"decimals\": 18,\n    \"chainID\": 1,\n    \"endorsed\": true,\n    \"boosted\": false,\n    \"emergency_shutdown\": false,\n    \"token\": {\n      \"address\": \"0x0CD6f267b2086bea681E922E19D40512511BE538\",\n      \"underlyingTokensAddresses\": [\n        \"0x5746bA5F568a887B8CFd2FA9DD75C0653dd381E2\",\n        \"0xa3a4e4C56c1Fca78F59Cb3f5B03FBb0610682557\"\n      ],\n      \"name\": \"Curve crvUSD-FRAX Pool\",\n      \"symbol\": \"crvUSDFRAX-f\",\n      \"type\": \"Curve LP\",\n      \"display_name\": \"string\",\n      \"display_symbol\": \"string\",\n      \"description\": \"string\",\n      \"icon\": \"http://uiKfIOjwuqBJQkANeJTaCYULgYhdiicw.phBCa5q4SHKZAUcKP77ZQ6ULAkCNRttPI6\",\n      \"decimals\": 18\n    },\n    \"tvl\": {\n      \"totalAssets\": \"1287176248097615589\",\n      \"tvl\": 1.29,\n      \"price\": 1.005\n    },\n    \"apr\": {\n      \"type\": \"v2:averaged\",\n      \"netAPR\": 751.2947571410522,\n      \"fees\": {\n        \"performance\": 0.1,\n        \"management\": 0\n      },\n      \"points\": {\n        \"weekAgo\": 9903.814252279006,\n        \"monthAgo\": 7956.754779037293,\n        \"inception\": 2081.528153411446\n      },\n      \"pricePerShare\": {\n        \"today\": 7369.6245324083575,\n        \"weekAgo\": 8488.1934775491,\n        \"monthAgo\": 4935.455427784801\n      },\n      \"extra\": {\n        \"stakingRewardsAPR\": 8326.695566816581,\n        \"gammaRewardAPR\": 686.975031903363\n      },\n      \"forwardAPR\": {\n        \"type\": \"crv\",\n        \"netAPR\": 7890.62590937169,\n        \"composite\": {\n          \"boost\": 1741.6436885849484,\n          \"poolAPY\": 9993.032937539603,\n          \"boostedAPR\": 3524.0069295986764,\n          \"baseAPR\": 1964.7913941572538,\n          \"cvxAPR\": 8747.61769660911,\n          \"rewardsAPR\": 6089.7790491010055\n        }\n      }\n    },\n    \"details\": {\n      \"isRetired\": false,\n      \"isHidden\": true,\n      \"isAggregator\": false,\n      \"isBoosted\": false,\n      \"isAutomated\": false,\n      \"isHighlighted\": false,\n      \"isPool\": false,\n      \"poolProvider\": \"Curve\",\n      \"stability\": \"Stable\",\n      \"category\": \"Stablecoin\",\n      \"stableBaseAsset\": \"USD\"\n    },\n    \"strategies\": [\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 561.708530625673,\n          \"lastReport\": 4442,\n          \"debtRatio\": 481.9250377582462\n        }\n      },\n      {\n        \"address\": \"0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641\",\n        \"name\": \"StrategyCurveBoostedFactory-crvUSDFRAX-f\",\n        \"status\": \"active\",\n        \"details\": {\n          \"totalDebt\": \"string\",\n          \"totalLoss\": \"string\",\n          \"totalGain\": \"string\",\n          \"performanceFee\": 3064.6245530970295,\n          \"lastReport\": 3353,\n          \"debtRatio\": 9943.114118544858\n        }\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8fe77d1b-032c-4d87-bcc3-8596631680f9",
+          "name": "Get blacklisted vaults",
+          "request": {
+            "name": "Get blacklisted vaults",
+            "description": {
+              "content": "Returns the list of vault contract addresses that are blacklisted and excluded from results across all supported networks.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "info",
+                "vaults",
+                "blacklisted"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "61f98fcd-0175-4092-8592-42800b6521f1",
+              "name": "An array of blacklisted vault contract addresses.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "info",
+                    "vaults",
+                    "blacklisted"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"0x6884bd538db61a626da0a05e10807bfc5aea2b32\",\n  \"0xdb8bbf2b0e28721f9bac603e687e39bcf52201f8\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ydaemon.yearn.fi",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4eceb62c-a114-4755-985d-56b9cbfbc3d3",
+    "name": "Yearn Finance yDaemon REST Chains Vaults API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The primary REST API for Yearn Finance, providing access to vault data, APY calculations, TVL metrics, strategy information, and protocol analytics across all supported EVM networks including Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum. Used by the production Yearn frontends.\n\nContact Support:\n Name: Yearn Finance",
+      "type": "text/plain"
+    }
+  }
+}

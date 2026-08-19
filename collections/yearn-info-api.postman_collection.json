@@ -1,0 +1,178 @@
+{
+  "item": [
+    {
+      "id": "e01824f0-67d0-4d7d-8cba-6d975b789e8c",
+      "name": "Info",
+      "description": {
+        "content": "Protocol information and metadata",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a654d269-2c68-4ff3-854b-0109c5d1044b",
+          "name": "Get supported chains",
+          "request": {
+            "name": "Get supported chains",
+            "description": {
+              "content": "Returns the list of blockchain networks supported by the yDaemon API, including Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum, along with their RPC and contract configuration data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "info",
+                "chains"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "606d3229-ec18-4549-be3c-7bdc33ca93d9",
+              "name": "An object mapping chain IDs to chain configuration data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "info",
+                    "chains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"chains\": {\n    \"key_0\": {\n      \"ID\": 1,\n      \"RpcURI\": \"http://ziPMph.mfgwkYjtpyvVPkudzcoV6HKds3PzC3f..v1MHVqpFEl8YprmbBEcdVk5FA3qvPAlVM1qBchItX\",\n      \"SubgraphURI\": \"https://rzgdFtEAHos.ljth\",\n      \"EtherscanURI\": \"http://PBsdpsr.zxXo4Pvq+W,FsZ1mJL,GwXp.PZOeHRwcqYS1KClUWn-2tqcsYztDiJ8xzfwVzCtcXJe7ou87A2\",\n      \"MaxBlockRange\": 8213,\n      \"MaxBatchSize\": 7946,\n      \"AvgBlocksPerDay\": 8638,\n      \"CanUseWebsocket\": true,\n      \"LensContract\": {\n        \"Address\": \"0xcab157dfba497de5d4deD1E80E03fbA76cCdFD1d\",\n        \"Block\": 1472,\n        \"Version\": 4792,\n        \"Tag\": \"string\",\n        \"Label\": \"string\"\n      },\n      \"MulticallContract\": {\n        \"Address\": \"0x6F3e979fbb92791Ec7A27FfF71F1cE4DCd44Cca7\",\n        \"Block\": 2661,\n        \"Version\": 1627,\n        \"Tag\": \"string\",\n        \"Label\": \"string\"\n      },\n      \"YBribeV3Contract\": {\n        \"Address\": \"0xba3e7aA1bBBaFa484C4DbBE4f6F50fAf0E4C59Ff\",\n        \"Block\": 3994,\n        \"Version\": 3174,\n        \"Tag\": \"string\",\n        \"Label\": \"string\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a85ee882-cb8c-4241-a377-c23ab66010fc",
+          "name": "Get blacklisted vaults",
+          "request": {
+            "name": "Get blacklisted vaults",
+            "description": {
+              "content": "Returns the list of vault contract addresses that are blacklisted and excluded from results across all supported networks.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "info",
+                "vaults",
+                "blacklisted"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "978fb5ac-e03f-4425-9d12-5fdf2a447054",
+              "name": "An array of blacklisted vault contract addresses.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "info",
+                    "vaults",
+                    "blacklisted"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"0x6884bd538db61a626da0a05e10807bfc5aea2b32\",\n  \"0xdb8bbf2b0e28721f9bac603e687e39bcf52201f8\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ydaemon.yearn.fi",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bd10fee1-ebe9-400d-a028-c6e14ea83e6a",
+    "name": "Yearn Finance yDaemon REST Chains Info API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The primary REST API for Yearn Finance, providing access to vault data, APY calculations, TVL metrics, strategy information, and protocol analytics across all supported EVM networks including Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum. Used by the production Yearn frontends.\n\nContact Support:\n Name: Yearn Finance",
+      "type": "text/plain"
+    }
+  }
+}

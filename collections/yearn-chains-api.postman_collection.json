@@ -1,0 +1,104 @@
+{
+  "item": [
+    {
+      "id": "970f5c6f-3ab1-4aa9-9fd8-c6e2d09d6930",
+      "name": "Chains",
+      "description": {
+        "content": "Supported blockchain network information",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "18bf7de1-ae01-4f14-9645-61651465044e",
+          "name": "Get supported chains",
+          "request": {
+            "name": "Get supported chains",
+            "description": {
+              "content": "Returns the list of blockchain networks supported by the yDaemon API, including Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum, along with their RPC and contract configuration data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "info",
+                "chains"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8b812b41-4ddf-4cc8-89f4-b6943c3aad7f",
+              "name": "An object mapping chain IDs to chain configuration data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "info",
+                    "chains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"chains\": {\n    \"key_0\": {\n      \"ID\": 1,\n      \"RpcURI\": \"http://h.bjozkr8NUgrEF9z8Jgk8Rwdj-sH0I.Eno+SZVf2iIg6Ky+jnAeVkoKQ1si8DGxu3mTCfIDXE\",\n      \"SubgraphURI\": \"http://SWTeNzHyaSkEkGyXrhBrwaUCTwWlr.dtwxOLqhr7ox6MzDjfYKFP,dvwkA,r4n2eWVsvprFdEkQIUU0D-GMz+AtD8GV\",\n      \"EtherscanURI\": \"http://scLwhQvDXqmKYPDYnqnqRB.ewDCCawW0lOvzyfem9DEeAkW\",\n      \"MaxBlockRange\": 2245,\n      \"MaxBatchSize\": 4457,\n      \"AvgBlocksPerDay\": 821,\n      \"CanUseWebsocket\": false,\n      \"LensContract\": {\n        \"Address\": \"0xDDa64bd9620c2d0f1FAbD78B7a8dFd5c6EFC30C4\",\n        \"Block\": 4187,\n        \"Version\": 470,\n        \"Tag\": \"string\",\n        \"Label\": \"string\"\n      },\n      \"MulticallContract\": {\n        \"Address\": \"0xB3ef7aC09f2BCAeAC52FD5CdEBff4f6c10f5F2Cd\",\n        \"Block\": 1800,\n        \"Version\": 8416,\n        \"Tag\": \"string\",\n        \"Label\": \"string\"\n      },\n      \"YBribeV3Contract\": {\n        \"Address\": \"0xEa69cB25F58BDbf49F8eA568b3bb0dE285bfAc7f\",\n        \"Block\": 2651,\n        \"Version\": 8881,\n        \"Tag\": \"string\",\n        \"Label\": \"string\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ydaemon.yearn.fi",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d6d05659-9412-4b5e-b41f-a0342f1f37a5",
+    "name": "Yearn Finance yDaemon REST Chains API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The primary REST API for Yearn Finance, providing access to vault data, APY calculations, TVL metrics, strategy information, and protocol analytics across all supported EVM networks including Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum. Used by the production Yearn frontends.\n\nContact Support:\n Name: Yearn Finance",
+      "type": "text/plain"
+    }
+  }
+}

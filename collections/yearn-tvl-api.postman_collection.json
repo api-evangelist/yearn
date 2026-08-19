@@ -1,0 +1,212 @@
+{
+  "item": [
+    {
+      "id": "77f941eb-f37e-4f02-aef8-6a6275c576bc",
+      "name": "TVL",
+      "description": {
+        "content": "Total Value Locked metrics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3900ad5c-542e-4710-ac0f-9003b6ca6e50",
+          "name": "Get total TVL for a chain",
+          "request": {
+            "name": "Get total TVL for a chain",
+            "description": {
+              "content": "Returns the Total Value Locked (in USD) aggregated across all vaults on the specified chain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":chainID",
+                "vaults",
+                "tvl"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "chainID",
+                  "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4fd9e438-4729-480c-8cc7-2fe747aef503",
+              "name": "Total Value Locked as a numeric USD value.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainID",
+                    "vaults",
+                    "tvl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainID",
+                      "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "181230031.34",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d4bc06a-6f43-473f-b0ea-6b3b64e11326",
+              "name": "Bad Request - invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainID",
+                    "vaults",
+                    "tvl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainID",
+                      "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54976df4-0314-495d-9869-c16121f63189",
+              "name": "Not Found - the requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":chainID",
+                    "vaults",
+                    "tvl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "chainID",
+                      "description": "(Required) The EVM chain ID. Supported values: 1 (Ethereum), 10 (Optimism), 137 (Polygon), 250 (Fantom), 8453 (Base), 42161 (Arbitrum)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ydaemon.yearn.fi",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6db5300b-1446-48e5-866c-fda660a01d7d",
+    "name": "Yearn Finance yDaemon REST Chains TVL API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The primary REST API for Yearn Finance, providing access to vault data, APY calculations, TVL metrics, strategy information, and protocol analytics across all supported EVM networks including Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum. Used by the production Yearn frontends.\n\nContact Support:\n Name: Yearn Finance",
+      "type": "text/plain"
+    }
+  }
+}
