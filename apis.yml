@@ -20,6 +20,14 @@ image: https://yearn.fi/logo.svg
 tags:
 - DeFi
 - Yield Aggregator
+- Vault
+- EVM
+- Web3
+- Blockchain
+- Finance
+tags_raw:
+- DeFi
+- Yield Aggregator
 - Vaults
 - EVM
 - Web3
@@ -35,6 +43,12 @@ apis:
   humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
   baseURL: https://kong.yearn.fi
   tags:
+  - GraphQL
+  - Vault
+  - Analytics
+  - Strategies
+  - Event
+  tags_raw:
   - GraphQL
   - Vaults
   - Analytics
@@ -59,6 +73,10 @@ apis:
     path: /api/gql
     method: POST
     tags:
+    - GraphQL
+    - Vault
+    - Analytics
+    tags_raw:
     - GraphQL
     - Vaults
     - Analytics
@@ -119,6 +137,8 @@ apis:
   humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
   baseURL: https://ydaemon.yearn.fi
   tags:
+  - Vault
+  tags_raw:
   - Vaults
   properties:
   - type: OpenAPI
