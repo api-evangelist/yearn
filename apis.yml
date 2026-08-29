@@ -3,6 +3,19 @@ description: Yearn Finance is a DeFi yield aggregator that automates yield farmi
   strategies across EVM-compatible networks. It provides REST and GraphQL APIs for
   accessing vault data, APY rates, strategy information, user positions, TVL metrics,
   and protocol analytics across Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum.
+deliveryModel:
+  model: self-hosted
+  license: MIT
+  open_source: true
+  commercial: false
+  callable_host: true
+  label: Self-hosted open source · you run it yourself
+  confidence: high
+  source:
+  - license
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 specificationVersion: '0.23'
 accessModel:
   pricing: free
@@ -154,6 +167,8 @@ maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 common:
+- type: IssueTracker
+  url: https://github.com/yearn/kong/issues
 - type: License
   name: MIT
   url: https://github.com/yearn/kong/blob/main/LICENSE
