@@ -1,8 +1,8 @@
 name: Yearn Finance
-description: Yearn Finance is a DeFi yield aggregator that automates yield farming
-  strategies across EVM-compatible networks. It provides REST and GraphQL APIs for
-  accessing vault data, APY rates, strategy information, user positions, TVL metrics,
-  and protocol analytics across Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum.
+description: Yearn Finance is a DeFi yield aggregator that automates yield farming strategies across EVM-compatible
+  networks. It provides REST and GraphQL APIs for accessing vault data, APY rates, strategy information,
+  user positions, TVL metrics, and protocol analytics across Ethereum, Optimism, Polygon, Fantom, Base,
+  and Arbitrum.
 deliveryModel:
   model: self-hosted
   license: MIT
@@ -49,10 +49,9 @@ tags_raw:
 url: https://yearn.fi
 apis:
 - name: Kong GraphQL API
-  description: >-
-    An integrated indexing service and GraphQL API providing comprehensive data on Yearn V2 and V3 vault
-    ecosystems, including contract snapshots, event histories, vault-strategy relationships, fees, rewards,
-    APY, and TVL timeseries data.
+  description: An integrated indexing service and GraphQL API providing comprehensive data on Yearn V2
+    and V3 vault ecosystems, including contract snapshots, event histories, vault-strategy relationships,
+    fees, rewards, APY, and TVL timeseries data.
   humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
   baseURL: https://kong.yearn.fi
   tags:
@@ -78,9 +77,8 @@ apis:
     X-twitter: iearnfinance
   apis:
   - name: Kong GraphQL Query
-    description: >-
-      GraphQL endpoint for querying Yearn V2 and V3 vault ecosystem data including snapshots, events,
-      APY timeseries, TVL, strategies, fees, rewards, and vault metadata.
+    description: GraphQL endpoint for querying Yearn V2 and V3 vault ecosystem data including snapshots,
+      events, APY timeseries, TVL, strategies, fees, rewards, and vault metadata.
     humanURL: https://docs.yearn.fi/developers/data-services/yearn-data
     baseURL: https://kong.yearn.fi
     path: /api/gql
@@ -162,11 +160,13 @@ apis:
     url: https://github.com/yearn/ydaemon
   - type: GraphQL
     url: graphql/yearn-graphql.md
-modified: 2026-06-13
+modified: '2026-09-16'
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 common:
+- type: Website
+  url: https://yearn.fi
 - type: IssueTracker
   url: https://github.com/yearn/kong/issues
 - type: License
