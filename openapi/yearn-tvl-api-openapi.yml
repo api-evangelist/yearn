@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Yearn Finance yDaemon REST Chains TVL API
+  title: Yearn Finance yDaemon REST TVL API
   description: The primary REST API for Yearn Finance, providing access to vault data, APY calculations, TVL metrics, strategy information, and protocol analytics across all supported EVM networks including Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum. Used by the production Yearn frontends.
   version: 1.0.0
   contact:
@@ -54,6 +54,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: not found
   parameters:
     chainID:
       name: chainID
@@ -70,14 +78,6 @@ components:
         - 250
         - 8453
         - 42161
-  schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: A human-readable error message.
-          example: not found
 externalDocs:
   description: Yearn Finance Developer Documentation
   url: https://docs.yearn.fi/developers/data-services/yearn-data

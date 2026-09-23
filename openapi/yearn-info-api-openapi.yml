@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Yearn Finance yDaemon REST Chains Info API
+  title: Yearn Finance yDaemon REST Info API
   description: The primary REST API for Yearn Finance, providing access to vault data, APY calculations, TVL metrics, strategy information, and protocol analytics across all supported EVM networks including Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum. Used by the production Yearn frontends.
   version: 1.0.0
   contact:
@@ -92,6 +92,15 @@ components:
           $ref: '#/components/schemas/ChainContract'
         YBribeV3Contract:
           $ref: '#/components/schemas/ChainContract'
+    ChainsResponse:
+      type: object
+      description: Map of chain IDs to chain configuration objects.
+      properties:
+        chains:
+          type: object
+          description: An object where each key is a chain ID string and the value is a ChainInfo object.
+          additionalProperties:
+            $ref: '#/components/schemas/ChainInfo'
     ChainContract:
       type: object
       description: A smart contract deployed on a chain.
@@ -112,15 +121,6 @@ components:
         Label:
           type: string
           description: Optional human-readable label.
-    ChainsResponse:
-      type: object
-      description: Map of chain IDs to chain configuration objects.
-      properties:
-        chains:
-          type: object
-          description: An object where each key is a chain ID string and the value is a ChainInfo object.
-          additionalProperties:
-            $ref: '#/components/schemas/ChainInfo'
 externalDocs:
   description: Yearn Finance Developer Documentation
   url: https://docs.yearn.fi/developers/data-services/yearn-data
