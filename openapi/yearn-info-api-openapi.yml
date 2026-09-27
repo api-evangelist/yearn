@@ -54,6 +54,15 @@ paths:
                 - '0xdb8bbf2b0e28721f9bac603e687e39bcf52201f8'
 components:
   schemas:
+    ChainsResponse:
+      type: object
+      description: Map of chain IDs to chain configuration objects.
+      properties:
+        chains:
+          type: object
+          description: An object where each key is a chain ID string and the value is a ChainInfo object.
+          additionalProperties:
+            $ref: '#/components/schemas/ChainInfo'
     ChainInfo:
       type: object
       description: Configuration and metadata for a supported EVM chain.
@@ -92,15 +101,6 @@ components:
           $ref: '#/components/schemas/ChainContract'
         YBribeV3Contract:
           $ref: '#/components/schemas/ChainContract'
-    ChainsResponse:
-      type: object
-      description: Map of chain IDs to chain configuration objects.
-      properties:
-        chains:
-          type: object
-          description: An object where each key is a chain ID string and the value is a ChainInfo object.
-          additionalProperties:
-            $ref: '#/components/schemas/ChainInfo'
     ChainContract:
       type: object
       description: A smart contract deployed on a chain.

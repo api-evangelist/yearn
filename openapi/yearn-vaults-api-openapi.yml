@@ -252,45 +252,6 @@ paths:
                 - '0xdb8bbf2b0e28721f9bac603e687e39bcf52201f8'
 components:
   schemas:
-    VaultAPRPoints:
-      type: object
-      description: Historical APR data points.
-      properties:
-        weekAgo:
-          type: number
-          format: double
-          description: Net APR one week ago.
-        monthAgo:
-          type: number
-          format: double
-          description: Net APR one month ago.
-        inception:
-          type: number
-          format: double
-          description: Net APR since vault inception.
-    VaultStrategy:
-      type: object
-      description: A strategy allocated to the vault.
-      properties:
-        address:
-          type: string
-          pattern: ^0x[a-fA-F0-9]{40}$
-          description: Contract address of the strategy.
-          example: '0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641'
-        name:
-          type: string
-          description: Name of the strategy.
-          example: StrategyCurveBoostedFactory-crvUSDFRAX-f
-        status:
-          type: string
-          description: Current status of the strategy.
-          enum:
-          - active
-          - inactive
-          - retired
-          example: active
-        details:
-          $ref: '#/components/schemas/VaultStrategyDetails'
     VaultStrategyDetails:
       type: object
       description: Detailed metrics for a vault strategy.
@@ -315,213 +276,6 @@ components:
           type: number
           format: double
           description: Fraction of vault assets allocated to this strategy.
-    VaultForwardAPR:
-      type: object
-      description: Forward-looking APR estimate.
-      properties:
-        type:
-          type: string
-          description: Strategy type used for the forward APR calculation.
-          example: crv
-        netAPR:
-          type: number
-          format: double
-          description: Net forward APR as a decimal.
-        composite:
-          $ref: '#/components/schemas/VaultForwardAPRComposite'
-    VaultAPRFees:
-      type: object
-      description: Fee structure for the vault.
-      properties:
-        performance:
-          type: number
-          format: double
-          description: Performance fee as a decimal (e.g. 0.1 = 10%).
-          example: 0.1
-        management:
-          type: number
-          format: double
-          description: Management fee as a decimal.
-          example: 0.0
-    VaultToken:
-      type: object
-      description: The underlying token accepted by the vault.
-      properties:
-        address:
-          type: string
-          pattern: ^0x[a-fA-F0-9]{40}$
-          description: Contract address of the underlying token.
-          example: '0x0CD6f267b2086bea681E922E19D40512511BE538'
-        underlyingTokensAddresses:
-          type: array
-          items:
-            type: string
-            pattern: ^0x[a-fA-F0-9]{40}$
-          description: Addresses of tokens composing an LP token.
-        name:
-          type: string
-          description: Name of the underlying token.
-          example: Curve crvUSD-FRAX Pool
-        symbol:
-          type: string
-          description: Symbol of the underlying token.
-          example: crvUSDFRAX-f
-        type:
-          type: string
-          description: Type classification of the token (e.g. Curve LP, ERC-20).
-          example: Curve LP
-        display_name:
-          type: string
-          description: Human-readable display name for the token.
-        display_symbol:
-          type: string
-          description: Human-readable display symbol.
-        description:
-          type: string
-          description: Markdown description of the token.
-        icon:
-          type: string
-          format: uri
-          description: URL of the token icon image.
-        decimals:
-          type: integer
-          description: Number of decimals for the token.
-          example: 18
-    VaultDetails:
-      type: object
-      description: Additional metadata and classification details for the vault.
-      properties:
-        isRetired:
-          type: boolean
-          description: Whether the vault is retired.
-        isHidden:
-          type: boolean
-          description: Whether the vault is hidden from the UI.
-        isAggregator:
-          type: boolean
-          description: Whether the vault is an aggregator type.
-        isBoosted:
-          type: boolean
-          description: Whether the vault has boosted rewards.
-        isAutomated:
-          type: boolean
-          description: Whether the vault uses automated strategies.
-        isHighlighted:
-          type: boolean
-          description: Whether the vault is highlighted/featured.
-        isPool:
-          type: boolean
-          description: Whether the underlying token is a liquidity pool token.
-        poolProvider:
-          type: string
-          description: Name of the liquidity pool provider (e.g. Curve, Balancer).
-          example: Curve
-        stability:
-          type: string
-          description: Stability classification of the vault assets.
-          example: Stable
-        category:
-          type: string
-          description: Asset category classification.
-          example: Stablecoin
-        stableBaseAsset:
-          type: string
-          description: Base asset for stable vaults.
-          example: USD
-    VaultForwardAPRComposite:
-      type: object
-      description: Composite breakdown of forward APR components.
-      properties:
-        boost:
-          type: number
-          format: double
-        poolAPY:
-          type: number
-          format: double
-        boostedAPR:
-          type: number
-          format: double
-        baseAPR:
-          type: number
-          format: double
-        cvxAPR:
-          type: number
-          format: double
-        rewardsAPR:
-          type: number
-          format: double
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: A human-readable error message.
-          example: not found
-    VaultAPRPricePerShare:
-      type: object
-      description: Price per share at different time points.
-      properties:
-        today:
-          type: number
-          format: double
-        weekAgo:
-          type: number
-          format: double
-        monthAgo:
-          type: number
-          format: double
-    VaultAPR:
-      type: object
-      description: Annual Percentage Rate data for the vault.
-      properties:
-        type:
-          type: string
-          description: APR calculation method.
-          example: v2:averaged
-        netAPR:
-          type: number
-          format: double
-          description: Current net APR as a decimal (e.g. 0.05 = 5%).
-        fees:
-          $ref: '#/components/schemas/VaultAPRFees'
-        points:
-          $ref: '#/components/schemas/VaultAPRPoints'
-        pricePerShare:
-          $ref: '#/components/schemas/VaultAPRPricePerShare'
-        extra:
-          $ref: '#/components/schemas/VaultAPRExtra'
-        forwardAPR:
-          $ref: '#/components/schemas/VaultForwardAPR'
-    VaultAPRExtra:
-      type: object
-      description: Additional APR components from external sources.
-      properties:
-        stakingRewardsAPR:
-          type: number
-          format: double
-          nullable: true
-        gammaRewardAPR:
-          type: number
-          format: double
-          nullable: true
-    VaultTVL:
-      type: object
-      description: Total Value Locked metrics for the vault.
-      properties:
-        totalAssets:
-          type: string
-          description: Raw total assets in the vault as a string integer (wei).
-          example: '1287176248097615589'
-        tvl:
-          type: number
-          format: double
-          description: Total Value Locked in USD.
-          example: 1.29
-        price:
-          type: number
-          format: double
-          description: Price of the underlying token in USD.
-          example: 1.005
     Vault:
       type: object
       description: A Yearn Finance vault with full metadata.
@@ -608,23 +362,266 @@ components:
           description: List of yield strategies allocated to the vault.
           items:
             $ref: '#/components/schemas/VaultStrategy'
+    VaultToken:
+      type: object
+      description: The underlying token accepted by the vault.
+      properties:
+        address:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+          description: Contract address of the underlying token.
+          example: '0x0CD6f267b2086bea681E922E19D40512511BE538'
+        underlyingTokensAddresses:
+          type: array
+          items:
+            type: string
+            pattern: ^0x[a-fA-F0-9]{40}$
+          description: Addresses of tokens composing an LP token.
+        name:
+          type: string
+          description: Name of the underlying token.
+          example: Curve crvUSD-FRAX Pool
+        symbol:
+          type: string
+          description: Symbol of the underlying token.
+          example: crvUSDFRAX-f
+        type:
+          type: string
+          description: Type classification of the token (e.g. Curve LP, ERC-20).
+          example: Curve LP
+        display_name:
+          type: string
+          description: Human-readable display name for the token.
+        display_symbol:
+          type: string
+          description: Human-readable display symbol.
+        description:
+          type: string
+          description: Markdown description of the token.
+        icon:
+          type: string
+          format: uri
+          description: URL of the token icon image.
+        decimals:
+          type: integer
+          description: Number of decimals for the token.
+          example: 18
+    VaultForwardAPRComposite:
+      type: object
+      description: Composite breakdown of forward APR components.
+      properties:
+        boost:
+          type: number
+          format: double
+        poolAPY:
+          type: number
+          format: double
+        boostedAPR:
+          type: number
+          format: double
+        baseAPR:
+          type: number
+          format: double
+        cvxAPR:
+          type: number
+          format: double
+        rewardsAPR:
+          type: number
+          format: double
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: not found
+    VaultForwardAPR:
+      type: object
+      description: Forward-looking APR estimate.
+      properties:
+        type:
+          type: string
+          description: Strategy type used for the forward APR calculation.
+          example: crv
+        netAPR:
+          type: number
+          format: double
+          description: Net forward APR as a decimal.
+        composite:
+          $ref: '#/components/schemas/VaultForwardAPRComposite'
+    VaultAPRPoints:
+      type: object
+      description: Historical APR data points.
+      properties:
+        weekAgo:
+          type: number
+          format: double
+          description: Net APR one week ago.
+        monthAgo:
+          type: number
+          format: double
+          description: Net APR one month ago.
+        inception:
+          type: number
+          format: double
+          description: Net APR since vault inception.
+    VaultAPR:
+      type: object
+      description: Annual Percentage Rate data for the vault.
+      properties:
+        type:
+          type: string
+          description: APR calculation method.
+          example: v2:averaged
+        netAPR:
+          type: number
+          format: double
+          description: Current net APR as a decimal (e.g. 0.05 = 5%).
+        fees:
+          $ref: '#/components/schemas/VaultAPRFees'
+        points:
+          $ref: '#/components/schemas/VaultAPRPoints'
+        pricePerShare:
+          $ref: '#/components/schemas/VaultAPRPricePerShare'
+        extra:
+          $ref: '#/components/schemas/VaultAPRExtra'
+        forwardAPR:
+          $ref: '#/components/schemas/VaultForwardAPR'
+    VaultTVL:
+      type: object
+      description: Total Value Locked metrics for the vault.
+      properties:
+        totalAssets:
+          type: string
+          description: Raw total assets in the vault as a string integer (wei).
+          example: '1287176248097615589'
+        tvl:
+          type: number
+          format: double
+          description: Total Value Locked in USD.
+          example: 1.29
+        price:
+          type: number
+          format: double
+          description: Price of the underlying token in USD.
+          example: 1.005
+    VaultAPRPricePerShare:
+      type: object
+      description: Price per share at different time points.
+      properties:
+        today:
+          type: number
+          format: double
+        weekAgo:
+          type: number
+          format: double
+        monthAgo:
+          type: number
+          format: double
+    VaultAPRFees:
+      type: object
+      description: Fee structure for the vault.
+      properties:
+        performance:
+          type: number
+          format: double
+          description: Performance fee as a decimal (e.g. 0.1 = 10%).
+          example: 0.1
+        management:
+          type: number
+          format: double
+          description: Management fee as a decimal.
+          example: 0.0
+    VaultStrategy:
+      type: object
+      description: A strategy allocated to the vault.
+      properties:
+        address:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+          description: Contract address of the strategy.
+          example: '0x78B964Dbb57ef4dBBBB0c33B83233F9091c92641'
+        name:
+          type: string
+          description: Name of the strategy.
+          example: StrategyCurveBoostedFactory-crvUSDFRAX-f
+        status:
+          type: string
+          description: Current status of the strategy.
+          enum:
+          - active
+          - inactive
+          - retired
+          example: active
+        details:
+          $ref: '#/components/schemas/VaultStrategyDetails'
+    VaultDetails:
+      type: object
+      description: Additional metadata and classification details for the vault.
+      properties:
+        isRetired:
+          type: boolean
+          description: Whether the vault is retired.
+        isHidden:
+          type: boolean
+          description: Whether the vault is hidden from the UI.
+        isAggregator:
+          type: boolean
+          description: Whether the vault is an aggregator type.
+        isBoosted:
+          type: boolean
+          description: Whether the vault has boosted rewards.
+        isAutomated:
+          type: boolean
+          description: Whether the vault uses automated strategies.
+        isHighlighted:
+          type: boolean
+          description: Whether the vault is highlighted/featured.
+        isPool:
+          type: boolean
+          description: Whether the underlying token is a liquidity pool token.
+        poolProvider:
+          type: string
+          description: Name of the liquidity pool provider (e.g. Curve, Balancer).
+          example: Curve
+        stability:
+          type: string
+          description: Stability classification of the vault assets.
+          example: Stable
+        category:
+          type: string
+          description: Asset category classification.
+          example: Stablecoin
+        stableBaseAsset:
+          type: string
+          description: Base asset for stable vaults.
+          example: USD
+    VaultAPRExtra:
+      type: object
+      description: Additional APR components from external sources.
+      properties:
+        stakingRewardsAPR:
+          type: number
+          format: double
+          nullable: true
+        gammaRewardAPR:
+          type: number
+          format: double
+          nullable: true
+  responses:
+    NotFound:
+      description: Not Found - the requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request - invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    orderBy:
-      name: orderBy
-      in: query
-      description: Determines the order of returned vaults.
-      schema:
-        type: string
-        default: featuringScore
-    limit:
-      name: limit
-      in: query
-      description: Number of vaults per page.
-      schema:
-        type: integer
-        default: 200
-        minimum: 1
-        maximum: 1000
     chainID:
       name: chainID
       in: path
@@ -640,6 +637,13 @@ components:
         - 250
         - 8453
         - 42161
+    orderBy:
+      name: orderBy
+      in: query
+      description: Determines the order of returned vaults.
+      schema:
+        type: string
+        default: featuringScore
     page:
       name: page
       in: query
@@ -648,6 +652,15 @@ components:
         type: integer
         default: 1
         minimum: 1
+    limit:
+      name: limit
+      in: query
+      description: Number of vaults per page.
+      schema:
+        type: integer
+        default: 200
+        minimum: 1
+        maximum: 1000
     orderDirection:
       name: orderDirection
       in: query
@@ -658,19 +671,6 @@ components:
         - asc
         - desc
         default: asc
-  responses:
-    BadRequest:
-      description: Bad Request - invalid parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not Found - the requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
 externalDocs:
   description: Yearn Finance Developer Documentation
   url: https://docs.yearn.fi/developers/data-services/yearn-data
