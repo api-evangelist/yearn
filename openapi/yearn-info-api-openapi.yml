@@ -92,6 +92,15 @@ components:
           $ref: '#/components/schemas/ChainContract'
         YBribeV3Contract:
           $ref: '#/components/schemas/ChainContract'
+    ChainsResponse:
+      type: object
+      description: Map of chain IDs to chain configuration objects.
+      properties:
+        chains:
+          type: object
+          description: An object where each key is a chain ID string and the value is a ChainInfo object.
+          additionalProperties:
+            $ref: '#/components/schemas/ChainInfo'
     ChainContract:
       type: object
       description: A smart contract deployed on a chain.
@@ -112,15 +121,6 @@ components:
         Label:
           type: string
           description: Optional human-readable label.
-    ChainsResponse:
-      type: object
-      description: Map of chain IDs to chain configuration objects.
-      properties:
-        chains:
-          type: object
-          description: An object where each key is a chain ID string and the value is a ChainInfo object.
-          additionalProperties:
-            $ref: '#/components/schemas/ChainInfo'
 externalDocs:
   description: Yearn Finance Developer Documentation
   url: https://docs.yearn.fi/developers/data-services/yearn-data
