@@ -41,14 +41,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          description: A human-readable error message.
-          example: not found
   responses:
     NotFound:
       description: Not Found - the requested resource does not exist.
@@ -62,6 +54,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: not found
   parameters:
     chainID:
       name: chainID
