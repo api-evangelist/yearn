@@ -1,4 +1,4 @@
-# Yearn Finance (yearn)
+# Yearn Finance
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,67 +66,142 @@
 
 Yearn Finance is a DeFi yield aggregator that automates yield farming strategies across EVM-compatible networks. It provides REST and GraphQL APIs for accessing vault data, APY rates, strategy information, user positions, TVL metrics, and protocol analytics across Ethereum, Optimism, Polygon, Fantom, Base, and Arbitrum.
 
-**APIs.json:** [https://yearn.fi](https://yearn.fi)
+**Areas:** DeFi · Yield Aggregator · Vault · EVM · Web3 · Blockchain · Finance
 
-## Tags
+## Yearn Finance on APIs.io
 
-- DeFi
-- Yield Aggregator
-- Vaults
-- EVM
-- Web3
-- Blockchain
-- Finance
+Everything profiled for Yearn Finance is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/yearn/](https://apis.io/providers/yearn/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (5)
 
-- **Modified:** Fri Jun 12 2026 20:00:00 GMT-0400 (Eastern Daylight Time)
+- [Kong GraphQL API](https://apis.io/apis/yearn/kong-graphql-api/) — An integrated indexing service and GraphQL API providing comprehensive data on Yearn V2 and V3 vault ecosystems, including contract snapshots, event…
+- [Yearn Finance Chains API](https://apis.io/apis/yearn/yearn-chains-api/) — Supported blockchain network information
+- [Yearn Finance Info API](https://apis.io/apis/yearn/yearn-info-api/) — Protocol information and metadata
+- [Yearn Finance TVL API](https://apis.io/apis/yearn/yearn-tvl-api/) — Total Value Locked metrics
+- [Yearn Finance Vaults API](https://apis.io/apis/yearn/yearn-vaults-api/) — Endpoints for querying Yearn vault data
 
-## APIs
+### Published properties
 
-### yDaemon REST API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-The primary REST API for Yearn Finance providing access to vault data, APY calculations, TVL metrics, strategy information, and protocol analytics across all supported EVM networks. Used by the production Yearn frontends.
+#### GraphQL (1)
 
-- **Human URL:** [https://docs.yearn.fi/developers/data-services/yearn-data](https://docs.yearn.fi/developers/data-services/yearn-data)
-- **Base URL:** `https://ydaemon.yearn.fi`
+GraphQL schemas.
 
-#### Tags
+- [Yearn Finance GraphQL API](https://apis.io/graphqls/yearn/yearn-graphql/)
 
-- Vaults
-- APY
-- TVL
-- Strategies
-- DeFi
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://docs.yearn.fi/developers/data-services/yearn-data)
-- [OpenAPI](https://ydaemon.yearn.fi/docs) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [GitHub Repository](https://github.com/yearn/ydaemon)
-- [Graph Q L](graphql/yearn-graphql.md)
+- [Yearn Agentic Access](https://apis.io/agentic-access/yearn/yearn-agentic-access/)
 
-### Kong GraphQL API
+#### JSON Schema (1)
 
-An integrated indexing service and GraphQL API providing comprehensive data on Yearn V2 and V3 vault ecosystems, including contract snapshots, event histories, vault-strategy relationships, fees, rewards, APY, and TVL timeseries data.
+The data models the API reads and writes.
 
-- **Human URL:** [https://docs.yearn.fi/developers/data-services/yearn-data](https://docs.yearn.fi/developers/data-services/yearn-data)
-- **Base URL:** `https://kong.yearn.fi`
+- [Vault](https://apis.io/schemas/yearn/vault/)
 
-#### Tags
+#### JSON-LD (1)
 
-- GraphQL
-- Vaults
-- Analytics
-- Strategies
-- Events
+Linked-data contexts for the provider's vocabulary.
 
-#### Properties
+- [context Context](https://apis.io/jsonld/yearn/context/)
 
-- [Documentation](https://docs.yearn.fi/developers/data-services/yearn-data)
-- [GitHub Repository](https://github.com/yearn/kong)
+#### Collections (4)
 
-## Maintainers
+Postman and Open Collection request collections.
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+- [Yearn Finance yDaemon REST Chains API](https://apis.io/collections/yearn/open-yearn-chains-api/)
+- [Yearn Finance yDaemon REST Chains Info API](https://apis.io/collections/yearn/open-yearn-info-api/)
+- [Yearn Finance yDaemon REST Chains TVL API](https://apis.io/collections/yearn/open-yearn-tvl-api/)
+- [Yearn Finance yDaemon REST Chains Vaults API](https://apis.io/collections/yearn/open-yearn-vaults-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Yearn Finance — jsonschema rules](https://apis.io/rules/yearn/yearn-jsonschema-spectral-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Yearn Domain Security](https://apis.io/security/yearn/yearn-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Plans](https://apis.io/plans/yearn/plans/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Rate Limits](https://apis.io/rate-limits/yearn/rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Finops](https://apis.io/finops/yearn/finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://yearn.fi)
+
+## API Evangelist rating
+
+**Kin Score 23.1** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 57.1 |
+| Contract governance | 9.8 |
+| Operational transparency | 5.3 |
+| Developer ergonomics | 9.5 |
+| Access clarity | 5.3 |
+
+**Agent readiness 20.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/yearn/](https://apis.io/providers/yearn/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Yearn Finance: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/yearn/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
